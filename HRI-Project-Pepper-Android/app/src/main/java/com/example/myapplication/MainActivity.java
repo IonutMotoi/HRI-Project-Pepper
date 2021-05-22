@@ -2,7 +2,10 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
@@ -17,6 +20,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
     }
@@ -47,5 +51,11 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     @Override
     public void onRobotFocusRefused(String reason) {
         // The robot focus is refused.
+    }
+
+    /** Called when the user taps on the Start Order button */
+    public void startOrder(View view) {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
     }
 }
