@@ -17,7 +17,7 @@ robot_is_speaking = False
 while(True):
     if not robot_is_speaking:
         with sr.Microphone(device_index=1) as source:
-            #r.adjust_for_ambient_noise(source, duration=1)
+            r.adjust_for_ambient_noise(source)
             #r.energy_threshold = 300
             print("Speak Anything :")
             audio = r.listen(source)
