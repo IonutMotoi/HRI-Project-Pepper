@@ -16,16 +16,11 @@ concept:(bring) [bring get take]
 
 # Rules
 u:(~hello) ~hello_ans ^nextProposal
-u:(~whats-your-name) ^rand[~my-name] Pepper
 u:(~how-are-you) ~feel-good
 u:(~ordering) Sure bitch, what you want? $Start=true
 
 u:(~my-name _*) Hi $1, nice to meet you $Name=$1
 u:(~bye) ^first["~bye $Name" ~bye]
-
-u:(~bringme _*) OK. Which kind of $1 would you like?
-  u1:(_*) Sure. I can bring you $1
-
 
 proposal: How are you?
   u1:(~feel-good) Great. %feelgood
