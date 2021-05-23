@@ -115,7 +115,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
 
         startVariable.addOnValueChangedListener(
                 currentValue -> {
-                    if (currentValue == "true") {
+                    if (currentValue.equals("true")) {
                         Log.i(TAG, "Chat var Start: " + currentValue);
                         startOrder();
                     }
