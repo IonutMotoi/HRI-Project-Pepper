@@ -2,6 +2,7 @@ import speech_recognition as sr
 import keyboard
 from pywinauto import Desktop
 from pywinauto.application import Application
+import time 
 
 r = sr.Recognizer()
 
@@ -12,7 +13,7 @@ with sr.Microphone(device_index=1) as source:
     audio = r.listen(source)
     
     try:
-        text = r.recognize_google(audio, language="en-US")
+        text = r.recognize_google(audio, language="en-GB")
         print("You said (US) : {}".format(text))
     except:
         print("Sorry could not recognize what you said")
@@ -20,5 +21,9 @@ with sr.Microphone(device_index=1) as source:
 ###WRITE TEXT
 #keyboard.write(text)
 
-windows = Desktop(backend="uia").windows()
-print(windows)
+app = Application().connect(title='Dialog view')
+more = app.DialogView
+more.wrapper_object()
+more.set_focus()
+time.sleep(1)
+keyboard.write(text)
