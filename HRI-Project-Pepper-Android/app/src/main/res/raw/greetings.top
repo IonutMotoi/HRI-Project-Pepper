@@ -1,21 +1,24 @@
 topic: ~greetings()
 
 # Concepts
-concept:(hello) ^rand[hello hi hey "good morning" greetings]
-concept:(whats-your-name) ["your name" "what name"]
+concept:(hello) ^rand[hello hi hey greetings]
+concept:(hello_ans) ^rand[hi hey "hi, how can I help you?" "hi, would you like to order?"]
+concept:(ordering) ["{Hi} {Hello} {I} {want} {would like} {to} order" "{Hi} {Hello} {can you} {please} ~bring {me} {some} {a}"
+                    "{Hi} {Hello} {I} {want} {would like} {to} eat {something}"]
 concept:(how-are-you) ["how are you" "how are you doing"]
 concept:(feel-good) ^rand[well super great fine ok good]
 concept:(feel-bad) ^rand[bad "not well" "not good" "tired"]
 concept:(my-name) ^rand["my name is" "I am" "I'm"]
 concept:(bye) ^rand["bye" "bye bye" "good bye" "see you soon"]
-
+concept:(ask) [want "would like" need ]
 concept:(bring) [bring get take]
-concept:(bringme) ["{can you} {please} ~bring {me} {some} {a}"]
+
 
 # Rules
-u:(~hello) ~hello ^nextProposal
+u:(~hello) ~hello_ans ^nextProposal
 u:(~whats-your-name) ^rand[~my-name] Pepper
 u:(~how-are-you) ~feel-good
+u:(~ordering) Sure bitch, what you want? $Start=true
 
 u:(~my-name _*) Hi $1, nice to meet you $Name=$1
 u:(~bye) ^first["~bye $Name" ~bye]
