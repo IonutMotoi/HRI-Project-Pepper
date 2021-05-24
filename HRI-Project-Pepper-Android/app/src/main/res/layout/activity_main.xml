@@ -21,7 +21,6 @@
         android:id="@+id/button_start_order"
         android:layout_width="300dp"
         android:layout_height="64dp"
-        android:onClick="startOrder"
         android:text="Start Order"
         android:textColor="@android:color/primary_text_light"
         android:textSize="32sp"

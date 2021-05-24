@@ -1,11 +1,9 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import com.aldebaran.qi.Future;
@@ -14,18 +12,16 @@ import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.builder.ChatBuilder;
 import com.aldebaran.qi.sdk.builder.QiChatbotBuilder;
-import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.builder.TopicBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.object.conversation.Chat;
 import com.aldebaran.qi.sdk.object.conversation.QiChatVariable;
 import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
-import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.aldebaran.qi.sdk.object.conversation.Topic;
 
 public class MainActivity  extends RobotActivity implements RobotLifecycleCallbacks {
 
-    private static final String TAG ="MainActivty";
+    private static final String TAG ="MainActivity";
 
     // The QiContext provided by the QiSDK.
     private QiContext qiContext = null;
@@ -33,10 +29,16 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     // Store the Chat action.
     private Chat chatAction;
 
+    // Start Order Button
+    private Button startOrderButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        startOrderButton = (Button)findViewById(R.id.button_start_order);
+        startOrderButton.setOnClickListener(v -> startOrder());
 
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
@@ -79,13 +81,8 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         // The robot focus is refused.
     }
 
-    /** Called when the user taps on the Start Order button */
-    public void startOrder(View view) {
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
-    }
 
-    /** Called when the user says Start Order */
+    /** Called when the user wants to start the order */
     public void startOrder() {
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
