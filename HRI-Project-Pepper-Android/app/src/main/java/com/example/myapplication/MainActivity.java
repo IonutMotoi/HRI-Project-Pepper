@@ -32,6 +32,9 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     // Start Order Button
     private Button startOrderButton;
 
+    private Button startOrderButton2;
+    private Button startOrderButton3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,8 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
 
         startOrderButton = (Button)findViewById(R.id.button_start_order);
         startOrderButton.setOnClickListener(v -> startOrder());
+
+
 
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
@@ -84,8 +89,19 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
 
     /** Called when the user wants to start the order */
     public void startOrder() {
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
+
+        setContentView(R.layout.drinks_menu);
+
+        startOrderButton2 = (Button)findViewById(R.id.button_start_order2);
+        startOrderButton2.setOnClickListener(v -> change());
+    }
+
+    public void change() {
+
+        setContentView(R.layout.activity_menu);
+
+        startOrderButton3 = (Button)findViewById(R.id.button_start_order3);
+        startOrderButton3.setOnClickListener(v -> startOrder());
     }
 
     public void initActions() {

@@ -17,6 +17,7 @@ with sr.Microphone(device_index=1) as source:
          print("You said (US) : {}".format(text))
    except:
          print("Sorry could not recognize what you said")
+
 # Initialize "Dialog view" window controller
 app = Application().connect(title='Dialog view')
 more = app.DialogView

@@ -135,5 +135,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.182" />
 
+    <Button
+        android:id="@+id/button_start_order2"
+        android:layout_width="300dp"
+        android:layout_height="64dp"
+        android:text="Start Order"
+        android:textColor="@android:color/primary_text_light"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_welcome" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
