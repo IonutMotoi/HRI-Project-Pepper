@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_beverages"
+        android:text="Beverages"
+        android:textSize="64sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/image_sprite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/image_back"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        />
+
+    <ImageView
+        android:id="@+id/image_coke"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="Coca Cola"
+        app:layout_constraintTop_toBottomOf="@id/text_beverages"
+        app:layout_constraintBottom_toTopOf="@id/image_fanta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/image_sprite"
+        app:srcCompat="@drawable/coke" />
+
+    <ImageView
+        android:id="@+id/image_fanta"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="Fanta"
+        app:layout_constraintTop_toBottomOf="@+id/image_coke"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/image_tea"
+        android:scaleType="centerCrop"
+        android:scaleX="1.35"
+        android:scaleY="1.35"
+        app:srcCompat="@drawable/fanta" />
+
+    <ImageView
+        android:id="@+id/image_sprite"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="Sprite"
+        app:layout_constraintTop_toBottomOf="@id/text_beverages"
+        app:layout_constraintBottom_toTopOf="@id/image_tea"
+        app:layout_constraintEnd_toStartOf="@id/image_water"
+        app:layout_constraintStart_toEndOf="@id/image_coke"
+        app:srcCompat="@drawable/sprite" />
+
+    <ImageView
+        android:id="@+id/image_tea"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="Tea"
+        app:layout_constraintTop_toBottomOf="@id/image_sprite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_fanta"
+        app:layout_constraintEnd_toStartOf="@id/image_beer"
+        app:srcCompat="@drawable/tea" />
+
+    <ImageView
+        android:id="@+id/image_water"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="Water"
+        app:layout_constraintTop_toBottomOf="@id/text_beverages"
+        app:layout_constraintBottom_toTopOf="@id/image_beer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_sprite"
+        app:srcCompat="@drawable/water" />
+
+    <ImageView
+        android:id="@+id/image_beer"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="Beer"
+        app:layout_constraintTop_toBottomOf="@id/image_water"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_tea"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/beer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
