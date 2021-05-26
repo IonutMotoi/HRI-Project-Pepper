@@ -1,10 +1,11 @@
 package com.example.myapplication;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;
@@ -29,19 +30,15 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     // Store the Chat action.
     private Chat chatAction;
 
-    // Start Order Button
+    // Buttons
     private Button startOrderButton;
-
-    private Button startOrderButton2;
-    private Button startOrderButton3;
+    private ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        startOrderButton = (Button)findViewById(R.id.button_start_order);
-        startOrderButton.setOnClickListener(v -> startOrder());
+        initStartView();
 
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
@@ -84,33 +81,6 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         // The robot focus is refused.
     }
 
-
-    /** Called when the user wants to start the order */
-    public void startOrder() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                setContentView(R.layout.drinks_menu);
-                startOrderButton2 = (Button)findViewById(R.id.button_start_order2);
-                startOrderButton2.setOnClickListener(v -> change());
-            }
-        });
-    }
-
-    public void change() {
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                setContentView(R.layout.activity_menu);
-                startOrderButton3 = (Button)findViewById(R.id.button_start_order3);
-                startOrderButton3.setOnClickListener(v -> startOrder());
-            }
-        });
-
-
-    }
-
     public void initActions() {
         // Create a chat topic
         Topic topic = TopicBuilder.with(qiContext) // Create the builder using the QiContext.
@@ -137,9 +107,32 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
                 currentValue -> {
                     if (currentValue.equals("true")) {
                         Log.i(TAG, "Chat var Start: " + currentValue);
-                        startOrder();
+                        initOrderView();
                     }
                 }
         );
+    }
+
+    public void initStartView() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setContentView(R.layout.activity_main);
+                startOrderButton = (Button) findViewById(R.id.button_start_order);
+                startOrderButton.setOnClickListener(v -> initOrderView());
+            }
+        });
+    }
+
+    /** Called when the user wants to start the order */
+    public void initOrderView() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setContentView(R.layout.beverages);
+                backButton = (ImageButton) findViewById(R.id.imagebutton_back);
+                backButton.setOnClickListener(v -> initStartView());
+            }
+        });
     }
 }

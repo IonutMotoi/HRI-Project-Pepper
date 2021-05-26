@@ -10,18 +10,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_beverages"
-        android:text="Beverages"
+        android:text="BEVERAGES"
         android:textSize="64sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/image_sprite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <ImageView
-        android:id="@+id/image_back"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        />
+    <ImageButton
+        android:id="@+id/imagebutton_back"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@id/image_coke"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        app:srcCompat="@drawable/back" />
 
     <ImageView
         android:id="@+id/image_coke"
