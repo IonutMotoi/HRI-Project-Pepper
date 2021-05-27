@@ -14,6 +14,7 @@
         android:textSize="64sp"
         android:textStyle="bold"
         android:textColor="@color/black"
+        android:translationY="-25dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/image_sprite"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +25,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
+        android:translationY="-25dp"
         app:layout_constraintBottom_toTopOf="@id/image_coke"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -159,11 +161,73 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:contentDescription="Water"
+        android:layout_marginTop="25dp"
         app:layout_constraintTop_toBottomOf="@id/text_beverages"
-        app:layout_constraintBottom_toTopOf="@id/image_beer"
+        app:layout_constraintBottom_toTopOf="@id/text_water"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/image_sprite"
         app:srcCompat="@drawable/water" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_price_water"
+        android:text="2.50€"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/image_water"
+        app:layout_constraintEnd_toEndOf="@id/image_water" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_water_plus"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:translationX="-20dp"
+        android:translationY="15dp"
+        app:layout_constraintTop_toTopOf="@id/image_water"
+        app:layout_constraintStart_toEndOf="@id/image_water"
+        app:srcCompat="@drawable/plus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_counter_water"
+        android:text="0"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:translationX="-20dp"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_water_plus"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_water_minus"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_water_plus"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_water_plus" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_water_minus"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:translationX="-20dp"
+        android:translationY="-15dp"
+        app:layout_constraintBottom_toBottomOf="@id/image_water"
+        app:layout_constraintStart_toEndOf="@id/image_water"
+        app:srcCompat="@drawable/minus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_water"
+        android:text="Water"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/image_water"
+        app:layout_constraintStart_toStartOf="@id/image_water"
+        app:layout_constraintEnd_toEndOf="@id/image_water" />
 
 
     <!-- Beer -->
@@ -173,10 +237,72 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:contentDescription="Beer"
+        android:layout_marginTop="25dp"
         app:layout_constraintTop_toBottomOf="@id/image_water"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/image_tea"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/beer" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_price_beer"
+        android:text="2.50€"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/image_beer"
+        app:layout_constraintEnd_toEndOf="@id/image_beer" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_beer_plus"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:translationX="-20dp"
+        android:translationY="15dp"
+        app:layout_constraintTop_toTopOf="@id/image_beer"
+        app:layout_constraintStart_toEndOf="@id/image_beer"
+        app:srcCompat="@drawable/plus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_counter_beer"
+        android:text="0"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:translationX="-20dp"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_beer_plus"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_beer_minus"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_beer_plus"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_beer_plus" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_beer_minus"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:translationX="-20dp"
+        android:translationY="-15dp"
+        app:layout_constraintBottom_toBottomOf="@id/image_beer"
+        app:layout_constraintStart_toEndOf="@id/image_beer"
+        app:srcCompat="@drawable/minus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_beer"
+        android:text="Beer"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/image_beer"
+        app:layout_constraintStart_toStartOf="@id/image_beer"
+        app:layout_constraintEnd_toEndOf="@id/image_beer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
