@@ -186,7 +186,7 @@
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/image_fanta"
         app:layout_constraintStart_toStartOf="@id/image_fanta"
-        app:layout_constraintEnd_toEndOf="@id/image_fanta"/>
+        app:layout_constraintEnd_toEndOf="@id/image_fanta" />
 
 
     <!-- Sprite -->
@@ -198,10 +198,71 @@
         android:contentDescription="Sprite"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/text_beverages"
-        app:layout_constraintBottom_toTopOf="@id/image_tea"
+        app:layout_constraintBottom_toTopOf="@id/text_sprite"
         app:layout_constraintEnd_toStartOf="@id/image_water"
         app:layout_constraintStart_toEndOf="@id/image_coke"
         app:srcCompat="@drawable/sprite" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_price_sprite"
+        android:text="2.50€"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/image_sprite"
+        app:layout_constraintEnd_toEndOf="@id/image_sprite" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_sprite_plus"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:translationX="-20dp"
+        android:translationY="15dp"
+        app:layout_constraintTop_toTopOf="@id/image_sprite"
+        app:layout_constraintStart_toEndOf="@id/image_sprite"
+        app:srcCompat="@drawable/plus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_counter_sprite"
+        android:text="0"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:translationX="-20dp"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_sprite_plus"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_sprite_minus"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_sprite_plus"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_sprite_plus" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_sprite_minus"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:translationX="-20dp"
+        android:translationY="-15dp"
+        app:layout_constraintBottom_toBottomOf="@id/image_sprite"
+        app:layout_constraintStart_toEndOf="@id/image_sprite"
+        app:srcCompat="@drawable/minus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_sprite"
+        android:text="Sprite"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/image_sprite"
+        app:layout_constraintStart_toStartOf="@id/image_sprite"
+        app:layout_constraintEnd_toEndOf="@id/image_sprite" />
 
 
     <!-- Tea -->
@@ -217,6 +278,67 @@
         app:layout_constraintStart_toEndOf="@id/image_fanta"
         app:layout_constraintEnd_toStartOf="@id/image_beer"
         app:srcCompat="@drawable/tea" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_price_tea"
+        android:text="2.50€"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/image_tea"
+        app:layout_constraintEnd_toEndOf="@id/image_tea" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_tea_plus"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:translationX="-20dp"
+        android:translationY="15dp"
+        app:layout_constraintTop_toTopOf="@id/image_tea"
+        app:layout_constraintStart_toEndOf="@id/image_tea"
+        app:srcCompat="@drawable/plus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_counter_tea"
+        android:text="0"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:translationX="-20dp"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_tea_plus"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_tea_minus"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_tea_plus"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_tea_plus" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_tea_minus"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:translationX="-20dp"
+        android:translationY="-15dp"
+        app:layout_constraintBottom_toBottomOf="@id/image_tea"
+        app:layout_constraintStart_toEndOf="@id/image_tea"
+        app:srcCompat="@drawable/minus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_tea"
+        android:text="Tea"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/image_tea"
+        app:layout_constraintStart_toStartOf="@id/image_tea"
+        app:layout_constraintEnd_toEndOf="@id/image_tea" />
 
 
     <!-- Water -->
