@@ -34,6 +34,20 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     private Button startOrderButton;
     private ImageButton backButton;
 
+    // Buttons plus and minus (12)
+    private ImageButton plusButton1;
+    private ImageButton plusButton2;
+    private ImageButton plusButton3;
+    private ImageButton plusButton4;
+    private ImageButton plusButton5;
+    private ImageButton plusButton6;
+    private ImageButton minusButton1;
+    private ImageButton minusButton2;
+    private ImageButton minusButton3;
+    private ImageButton minusButton4;
+    private ImageButton minusButton5;
+    private ImageButton minusButton6;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,7 +144,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
             @Override
             public void run() {
                 setContentView(R.layout.beverages);
-                backButton = (ImageButton) findViewById(R.id.imagebutton_back);
+                backButton = (ImageButton) findViewById(R.id.imagebutton_back_beverages);
                 backButton.setOnClickListener(v -> initStartView());
             }
         });
