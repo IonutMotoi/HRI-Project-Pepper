@@ -71,7 +71,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/counter_coke"
+        android:id="@+id/text_counter_coke"
         android:text="0"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -122,6 +122,67 @@
         android:scaleX="1.35"
         android:scaleY="1.35"
         app:srcCompat="@drawable/fanta" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_price_fanta"
+        android:text="2.50€"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/image_fanta"
+        app:layout_constraintEnd_toEndOf="@id/image_fanta" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_fanta_plus"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:translationX="-20dp"
+        android:translationY="15dp"
+        app:layout_constraintTop_toTopOf="@id/image_fanta"
+        app:layout_constraintStart_toEndOf="@id/image_fanta"
+        app:srcCompat="@drawable/plus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_counter_fanta"
+        android:text="0"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:translationX="-20dp"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_fanta_plus"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_fanta_minus"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_fanta_plus"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_fanta_plus" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_fanta_minus"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:translationX="-20dp"
+        android:translationY="-15dp"
+        app:layout_constraintBottom_toBottomOf="@id/image_fanta"
+        app:layout_constraintStart_toEndOf="@id/image_fanta"
+        app:srcCompat="@drawable/minus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_fanta"
+        android:text="Fanta"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/image_fanta"
+        app:layout_constraintStart_toStartOf="@id/image_fanta"
+        app:layout_constraintEnd_toEndOf="@id/image_fanta"/>
 
 
     <!-- Sprite -->
