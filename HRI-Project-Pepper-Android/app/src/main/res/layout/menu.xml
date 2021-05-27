@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_menu"
+        android:text="MENU"
+        android:textSize="64sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:translationY="-20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_mains"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/imagebutton_back"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:translationY="-20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_mains"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        app:srcCompat="@drawable/back" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_mains"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="Mains"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/text_menu"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_beverages"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imagebutton_sides"
+        app:srcCompat="@drawable/hamburger" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_sides"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="Sides"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/text_menu"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_desserts"
+        app:layout_constraintStart_toEndOf="@id/imagebutton_mains"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/fries" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_beverages"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="Beverages"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_mains"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imagebutton_desserts"
+        app:srcCompat="@drawable/coke" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_desserts"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="Desserts"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_sides"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imagebutton_beverages"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/donuts" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
