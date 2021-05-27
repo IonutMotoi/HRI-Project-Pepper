@@ -9,15 +9,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_beverages"
-        android:text="BEVERAGES"
+        android:id="@+id/text_main"
+        android:text="MAIN DISHES"
         android:textSize="64sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:translationY="-20dp"
         android:layout_marginTop="30dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/image_sprite"
+        app:layout_constraintBottom_toTopOf="@id/image_taco"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -28,7 +28,7 @@
         android:layout_marginStart="16dp"
         android:translationY="-20dp"
         android:layout_marginTop="30dp"
-        app:layout_constraintBottom_toTopOf="@id/image_coke"
+        app:layout_constraintBottom_toTopOf="@id/image_hamburger"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:scaleType="fitCenter"
@@ -36,462 +36,462 @@
         app:srcCompat="@drawable/back" />
 
 
-    <!-- Coke -->
+    <!-- Hamburger -->
 
     <ImageView
-        android:id="@+id/image_coke"
+        android:id="@+id/image_hamburger"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:contentDescription="Coca Cola"
+        android:contentDescription="Hamburger"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/text_beverages"
-        app:layout_constraintBottom_toTopOf="@id/text_coke"
+        app:layout_constraintTop_toBottomOf="@id/text_main"
+        app:layout_constraintBottom_toTopOf="@id/text_hamburger"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/image_sprite"
-        app:srcCompat="@drawable/coke" />
+        app:layout_constraintEnd_toStartOf="@id/image_taco"
+        app:srcCompat="@drawable/hamburger" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_price_coke"
+        android:id="@+id/text_price_hamburger"
         android:text="2.00€"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/image_coke"
-        app:layout_constraintEnd_toEndOf="@id/image_coke" />
+        app:layout_constraintBottom_toTopOf="@id/image_hamburger"
+        app:layout_constraintEnd_toEndOf="@id/image_hamburger" />
 
     <ImageButton
-        android:id="@+id/imagebutton_coke_plus"
+        android:id="@+id/imagebutton_hamburger_plus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:translationX="-20dp"
         android:translationY="15dp"
-        app:layout_constraintTop_toTopOf="@id/image_coke"
-        app:layout_constraintStart_toEndOf="@id/image_coke"
+        app:layout_constraintTop_toTopOf="@id/image_hamburger"
+        app:layout_constraintStart_toEndOf="@id/image_hamburger"
         app:srcCompat="@drawable/plus" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_counter_coke"
+        android:id="@+id/text_counter_hamburger"
         android:text="0"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:translationX="-20dp"
-        app:layout_constraintTop_toBottomOf="@id/imagebutton_coke_plus"
-        app:layout_constraintBottom_toTopOf="@id/imagebutton_coke_minus"
-        app:layout_constraintStart_toStartOf="@id/imagebutton_coke_plus"
-        app:layout_constraintEnd_toEndOf="@id/imagebutton_coke_plus" />
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_hamburger_plus"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_hamburger_minus"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_hamburger_plus"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_hamburger_plus" />
 
     <ImageButton
-        android:id="@+id/imagebutton_coke_minus"
+        android:id="@+id/imagebutton_hamburger_minus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:translationX="-20dp"
         android:translationY="-15dp"
-        app:layout_constraintBottom_toBottomOf="@id/image_coke"
-        app:layout_constraintStart_toEndOf="@id/image_coke"
+        app:layout_constraintBottom_toBottomOf="@id/image_hamburger"
+        app:layout_constraintStart_toEndOf="@id/image_hamburger"
         app:srcCompat="@drawable/minus" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_coke"
-        android:text="Coke"
+        android:id="@+id/text_hamburger"
+        android:text="Hamburger"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/image_coke"
-        app:layout_constraintStart_toStartOf="@id/image_coke"
-        app:layout_constraintEnd_toEndOf="@id/image_coke"/>
+        app:layout_constraintTop_toBottomOf="@id/image_hamburger"
+        app:layout_constraintStart_toStartOf="@id/image_hamburger"
+        app:layout_constraintEnd_toEndOf="@id/image_hamburger"/>
 
 
-    <!-- Fanta -->
+    <!-- Chicken Burger -->
 
     <ImageView
-        android:id="@+id/image_fanta"
+        android:id="@+id/image_chicken"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:contentDescription="Fanta"
+        android:contentDescription="Chicken"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/image_coke"
+        app:layout_constraintTop_toBottomOf="@+id/image_hamburger"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/image_tea"
+        app:layout_constraintEnd_toStartOf="@id/image_toast"
         android:scaleType="centerCrop"
         android:scaleX="1.35"
         android:scaleY="1.35"
-        app:srcCompat="@drawable/fanta" />
+        app:srcCompat="@drawable/chicken" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_price_fanta"
+        android:id="@+id/text_price_chicken"
         android:text="2.00€"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/image_fanta"
-        app:layout_constraintEnd_toEndOf="@id/image_fanta" />
+        app:layout_constraintBottom_toTopOf="@id/image_chicken"
+        app:layout_constraintEnd_toEndOf="@id/image_chicken" />
 
     <ImageButton
-        android:id="@+id/imagebutton_fanta_plus"
+        android:id="@+id/imagebutton_chicken_plus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:translationX="-20dp"
         android:translationY="15dp"
-        app:layout_constraintTop_toTopOf="@id/image_fanta"
-        app:layout_constraintStart_toEndOf="@id/image_fanta"
+        app:layout_constraintTop_toTopOf="@id/image_chicken"
+        app:layout_constraintStart_toEndOf="@id/image_chicken"
         app:srcCompat="@drawable/plus" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_counter_fanta"
+        android:id="@+id/text_counter_chicken"
         android:text="0"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:translationX="-20dp"
-        app:layout_constraintTop_toBottomOf="@id/imagebutton_fanta_plus"
-        app:layout_constraintBottom_toTopOf="@id/imagebutton_fanta_minus"
-        app:layout_constraintStart_toStartOf="@id/imagebutton_fanta_plus"
-        app:layout_constraintEnd_toEndOf="@id/imagebutton_fanta_plus" />
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_chicken_plus"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_chicken_minus"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_chicken_plus"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_chicken_plus" />
 
     <ImageButton
-        android:id="@+id/imagebutton_fanta_minus"
+        android:id="@+id/imagebutton_chicken_minus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:translationX="-20dp"
         android:translationY="-15dp"
-        app:layout_constraintBottom_toBottomOf="@id/image_fanta"
-        app:layout_constraintStart_toEndOf="@id/image_fanta"
+        app:layout_constraintBottom_toBottomOf="@id/image_chicken"
+        app:layout_constraintStart_toEndOf="@id/image_chicken"
         app:srcCompat="@drawable/minus" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_fanta"
-        android:text="Fanta"
+        android:id="@+id/text_chicken"
+        android:text="Chicken"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/image_fanta"
-        app:layout_constraintStart_toStartOf="@id/image_fanta"
-        app:layout_constraintEnd_toEndOf="@id/image_fanta" />
+        app:layout_constraintTop_toBottomOf="@id/image_chicken"
+        app:layout_constraintStart_toStartOf="@id/image_chicken"
+        app:layout_constraintEnd_toEndOf="@id/image_chicken" />
 
 
-    <!-- Sprite -->
+    <!-- Taco -->
 
     <ImageView
-        android:id="@+id/image_sprite"
+        android:id="@+id/image_taco"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:contentDescription="Sprite"
+        android:contentDescription="Taco"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/text_beverages"
-        app:layout_constraintBottom_toTopOf="@id/text_sprite"
-        app:layout_constraintEnd_toStartOf="@id/image_water"
-        app:layout_constraintStart_toEndOf="@id/image_coke"
-        app:srcCompat="@drawable/sprite" />
+        app:layout_constraintTop_toBottomOf="@id/text_main"
+        app:layout_constraintBottom_toTopOf="@id/text_taco"
+        app:layout_constraintEnd_toStartOf="@id/image_wrap"
+        app:layout_constraintStart_toEndOf="@id/image_hamburger"
+        app:srcCompat="@drawable/taco" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_price_sprite"
+        android:id="@+id/text_price_taco"
         android:text="2.00€"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/image_sprite"
-        app:layout_constraintEnd_toEndOf="@id/image_sprite" />
+        app:layout_constraintBottom_toTopOf="@id/image_taco"
+        app:layout_constraintEnd_toEndOf="@id/image_taco" />
 
     <ImageButton
-        android:id="@+id/imagebutton_sprite_plus"
+        android:id="@+id/imagebutton_taco_plus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:translationX="-20dp"
         android:translationY="15dp"
-        app:layout_constraintTop_toTopOf="@id/image_sprite"
-        app:layout_constraintStart_toEndOf="@id/image_sprite"
+        app:layout_constraintTop_toTopOf="@id/image_taco"
+        app:layout_constraintStart_toEndOf="@id/image_taco"
         app:srcCompat="@drawable/plus" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_counter_sprite"
+        android:id="@+id/text_counter_taco"
         android:text="0"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:translationX="-20dp"
-        app:layout_constraintTop_toBottomOf="@id/imagebutton_sprite_plus"
-        app:layout_constraintBottom_toTopOf="@id/imagebutton_sprite_minus"
-        app:layout_constraintStart_toStartOf="@id/imagebutton_sprite_plus"
-        app:layout_constraintEnd_toEndOf="@id/imagebutton_sprite_plus" />
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_taco_plus"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_taco_minus"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_taco_plus"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_taco_plus" />
 
     <ImageButton
-        android:id="@+id/imagebutton_sprite_minus"
+        android:id="@+id/imagebutton_taco_minus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:translationX="-20dp"
         android:translationY="-15dp"
-        app:layout_constraintBottom_toBottomOf="@id/image_sprite"
-        app:layout_constraintStart_toEndOf="@id/image_sprite"
+        app:layout_constraintBottom_toBottomOf="@id/image_taco"
+        app:layout_constraintStart_toEndOf="@id/image_taco"
         app:srcCompat="@drawable/minus" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_sprite"
-        android:text="Sprite"
+        android:id="@+id/text_taco"
+        android:text="Taco"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/image_sprite"
-        app:layout_constraintStart_toStartOf="@id/image_sprite"
-        app:layout_constraintEnd_toEndOf="@id/image_sprite" />
+        app:layout_constraintTop_toBottomOf="@id/image_taco"
+        app:layout_constraintStart_toStartOf="@id/image_taco"
+        app:layout_constraintEnd_toEndOf="@id/image_taco" />
 
 
-    <!-- Tea -->
+    <!-- Toast -->
 
     <ImageView
-        android:id="@+id/image_tea"
+        android:id="@+id/image_toast"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:contentDescription="Tea"
+        android:contentDescription="Toast"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/image_sprite"
+        app:layout_constraintTop_toBottomOf="@id/image_taco"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/image_fanta"
-        app:layout_constraintEnd_toStartOf="@id/image_beer"
-        app:srcCompat="@drawable/tea" />
+        app:layout_constraintStart_toEndOf="@id/image_chicken"
+        app:layout_constraintEnd_toStartOf="@id/image_pizza"
+        app:srcCompat="@drawable/toast" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_price_tea"
+        android:id="@+id/text_price_toast"
         android:text="1.50€"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/image_tea"
-        app:layout_constraintEnd_toEndOf="@id/image_tea" />
+        app:layout_constraintBottom_toTopOf="@id/image_toast"
+        app:layout_constraintEnd_toEndOf="@id/image_toast" />
 
     <ImageButton
-        android:id="@+id/imagebutton_tea_plus"
+        android:id="@+id/imagebutton_toast_plus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:translationX="-20dp"
         android:translationY="15dp"
-        app:layout_constraintTop_toTopOf="@id/image_tea"
-        app:layout_constraintStart_toEndOf="@id/image_tea"
+        app:layout_constraintTop_toTopOf="@id/image_toast"
+        app:layout_constraintStart_toEndOf="@id/image_toast"
         app:srcCompat="@drawable/plus" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_counter_tea"
+        android:id="@+id/text_counter_toast"
         android:text="0"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:translationX="-20dp"
-        app:layout_constraintTop_toBottomOf="@id/imagebutton_tea_plus"
-        app:layout_constraintBottom_toTopOf="@id/imagebutton_tea_minus"
-        app:layout_constraintStart_toStartOf="@id/imagebutton_tea_plus"
-        app:layout_constraintEnd_toEndOf="@id/imagebutton_tea_plus" />
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_toast_plus"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_toast_minus"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_toast_plus"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_toast_plus" />
 
     <ImageButton
-        android:id="@+id/imagebutton_tea_minus"
+        android:id="@+id/imagebutton_toast_minus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:translationX="-20dp"
         android:translationY="-15dp"
-        app:layout_constraintBottom_toBottomOf="@id/image_tea"
-        app:layout_constraintStart_toEndOf="@id/image_tea"
+        app:layout_constraintBottom_toBottomOf="@id/image_toast"
+        app:layout_constraintStart_toEndOf="@id/image_toast"
         app:srcCompat="@drawable/minus" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_tea"
-        android:text="Tea"
+        android:id="@+id/text_toast"
+        android:text="Toast"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/image_tea"
-        app:layout_constraintStart_toStartOf="@id/image_tea"
-        app:layout_constraintEnd_toEndOf="@id/image_tea" />
+        app:layout_constraintTop_toBottomOf="@id/image_toast"
+        app:layout_constraintStart_toStartOf="@id/image_toast"
+        app:layout_constraintEnd_toEndOf="@id/image_toast" />
 
 
-    <!-- Water -->
+    <!-- Wrap -->
 
     <ImageView
-        android:id="@+id/image_water"
+        android:id="@+id/image_wrap"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:contentDescription="Water"
+        android:contentDescription="Wrap"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/text_beverages"
-        app:layout_constraintBottom_toTopOf="@id/text_water"
+        app:layout_constraintTop_toBottomOf="@id/text_main"
+        app:layout_constraintBottom_toTopOf="@id/text_wrap"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/image_sprite"
-        app:srcCompat="@drawable/water" />
+        app:layout_constraintStart_toEndOf="@id/image_taco"
+        app:srcCompat="@drawable/wrap" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_price_water"
+        android:id="@+id/text_price_wrap"
         android:text="1.00€"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/image_water"
-        app:layout_constraintEnd_toEndOf="@id/image_water" />
+        app:layout_constraintBottom_toTopOf="@id/image_wrap"
+        app:layout_constraintEnd_toEndOf="@id/image_wrap" />
 
     <ImageButton
-        android:id="@+id/imagebutton_water_plus"
+        android:id="@+id/imagebutton_wrap_plus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:translationX="-20dp"
         android:translationY="15dp"
-        app:layout_constraintTop_toTopOf="@id/image_water"
-        app:layout_constraintStart_toEndOf="@id/image_water"
+        app:layout_constraintTop_toTopOf="@id/image_wrap"
+        app:layout_constraintStart_toEndOf="@id/image_wrap"
         app:srcCompat="@drawable/plus" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_counter_water"
+        android:id="@+id/text_counter_wrap"
         android:text="0"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:translationX="-20dp"
-        app:layout_constraintTop_toBottomOf="@id/imagebutton_water_plus"
-        app:layout_constraintBottom_toTopOf="@id/imagebutton_water_minus"
-        app:layout_constraintStart_toStartOf="@id/imagebutton_water_plus"
-        app:layout_constraintEnd_toEndOf="@id/imagebutton_water_plus" />
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_wrap_plus"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_wrap_minus"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_wrap_plus"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_wrap_plus" />
 
     <ImageButton
-        android:id="@+id/imagebutton_water_minus"
+        android:id="@+id/imagebutton_wrap_minus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:translationX="-20dp"
         android:translationY="-15dp"
-        app:layout_constraintBottom_toBottomOf="@id/image_water"
-        app:layout_constraintStart_toEndOf="@id/image_water"
+        app:layout_constraintBottom_toBottomOf="@id/image_wrap"
+        app:layout_constraintStart_toEndOf="@id/image_wrap"
         app:srcCompat="@drawable/minus" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_water"
-        android:text="Water"
+        android:id="@+id/text_wrap"
+        android:text="Wrap"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/image_water"
-        app:layout_constraintStart_toStartOf="@id/image_water"
-        app:layout_constraintEnd_toEndOf="@id/image_water" />
+        app:layout_constraintTop_toBottomOf="@id/image_wrap"
+        app:layout_constraintStart_toStartOf="@id/image_wrap"
+        app:layout_constraintEnd_toEndOf="@id/image_wrap" />
 
 
-    <!-- Beer -->
+    <!-- Pizza -->
 
     <ImageView
-        android:id="@+id/image_beer"
+        android:id="@+id/image_pizza"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:contentDescription="Beer"
+        android:contentDescription="Pizza"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/image_water"
+        app:layout_constraintTop_toBottomOf="@id/image_wrap"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/image_tea"
+        app:layout_constraintStart_toEndOf="@id/image_toast"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/beer" />
+        app:srcCompat="@drawable/pizza" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_price_beer"
+        android:id="@+id/text_price_pizza"
         android:text="2.50€"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/image_beer"
-        app:layout_constraintEnd_toEndOf="@id/image_beer" />
+        app:layout_constraintBottom_toTopOf="@id/image_pizza"
+        app:layout_constraintEnd_toEndOf="@id/image_pizza" />
 
     <ImageButton
-        android:id="@+id/imagebutton_beer_plus"
+        android:id="@+id/imagebutton_pizza_plus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:translationX="-20dp"
         android:translationY="15dp"
-        app:layout_constraintTop_toTopOf="@id/image_beer"
-        app:layout_constraintStart_toEndOf="@id/image_beer"
+        app:layout_constraintTop_toTopOf="@id/image_pizza"
+        app:layout_constraintStart_toEndOf="@id/image_pizza"
         app:srcCompat="@drawable/plus" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_counter_beer"
+        android:id="@+id/text_counter_pizza"
         android:text="0"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:translationX="-20dp"
-        app:layout_constraintTop_toBottomOf="@id/imagebutton_beer_plus"
-        app:layout_constraintBottom_toTopOf="@id/imagebutton_beer_minus"
-        app:layout_constraintStart_toStartOf="@id/imagebutton_beer_plus"
-        app:layout_constraintEnd_toEndOf="@id/imagebutton_beer_plus" />
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_pizza_plus"
+        app:layout_constraintBottom_toTopOf="@id/imagebutton_pizza_minus"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_pizza_plus"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_pizza_plus" />
 
     <ImageButton
-        android:id="@+id/imagebutton_beer_minus"
+        android:id="@+id/imagebutton_pizza_minus"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:translationX="-20dp"
         android:translationY="-15dp"
-        app:layout_constraintBottom_toBottomOf="@id/image_beer"
-        app:layout_constraintStart_toEndOf="@id/image_beer"
+        app:layout_constraintBottom_toBottomOf="@id/image_pizza"
+        app:layout_constraintStart_toEndOf="@id/image_pizza"
         app:srcCompat="@drawable/minus" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_beer"
-        android:text="Beer"
+        android:id="@+id/text_pizza"
+        android:text="Pizza"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/image_beer"
-        app:layout_constraintStart_toStartOf="@id/image_beer"
-        app:layout_constraintEnd_toEndOf="@id/image_beer" />
+        app:layout_constraintTop_toBottomOf="@id/image_pizza"
+        app:layout_constraintStart_toStartOf="@id/image_pizza"
+        app:layout_constraintEnd_toEndOf="@id/image_pizza" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
