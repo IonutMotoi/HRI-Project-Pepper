@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;
@@ -33,6 +32,12 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     // Buttons
     private Button startOrderButton;
     private ImageButton backButton;
+
+    // Menu buttons
+    private ImageButton mainsButton;
+    private ImageButton sidesButton;
+    private ImageButton beveragesButton;
+    private ImageButton dessertsButton;
 
     // Buttons plus and minus (12)
     private ImageButton plusButton1;
@@ -121,7 +126,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
                 currentValue -> {
                     if (currentValue.equals("true")) {
                         Log.i(TAG, "Chat var Start: " + currentValue);
-                        initOrderView();
+                        initMenuView();
                     }
                 }
         );
@@ -133,19 +138,81 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
             public void run() {
                 setContentView(R.layout.activity_main);
                 startOrderButton = (Button) findViewById(R.id.button_start_order);
-                startOrderButton.setOnClickListener(v -> initOrderView());
+                startOrderButton.setOnClickListener(v -> initMenuView());
             }
         });
     }
 
     /** Called when the user wants to start the order */
-    public void initOrderView() {
+    public void initMenuView() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setContentView(R.layout.menu);
+
+                mainsButton = (ImageButton) findViewById(R.id.imagebutton_mains);
+                mainsButton.setOnClickListener(v -> initMainsView());
+
+                sidesButton = (ImageButton) findViewById(R.id.imagebutton_sides);
+                sidesButton.setOnClickListener(v -> initSidesView());
+
+                beveragesButton = (ImageButton) findViewById(R.id.imagebutton_beverages);
+                beveragesButton.setOnClickListener(v -> initBeveragesView());
+
+                dessertsButton = (ImageButton) findViewById(R.id.imagebutton_desserts);
+                dessertsButton.setOnClickListener(v -> initDessertsView());
+            }
+        });
+    }
+
+    /** Called when the user wants to start the order */
+    public void initMainsView() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setContentView(R.layout.mains);
+
+                backButton = (ImageButton) findViewById(R.id.imagebutton_back_mains);
+                backButton.setOnClickListener(v -> initMenuView());
+            }
+        });
+    }
+
+    /** Called when the user wants to start the order */
+    public void initSidesView() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setContentView(R.layout.sides);
+
+                backButton = (ImageButton) findViewById(R.id.imagebutton_back_sides);
+                backButton.setOnClickListener(v -> initMenuView());
+            }
+        });
+    }
+
+    /** Called when the user wants to start the order */
+    public void initBeveragesView() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 setContentView(R.layout.beverages);
+
                 backButton = (ImageButton) findViewById(R.id.imagebutton_back_beverages);
-                backButton.setOnClickListener(v -> initStartView());
+                backButton.setOnClickListener(v -> initMenuView());
+            }
+        });
+    }
+
+    /** Called when the user wants to start the order */
+    public void initDessertsView() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setContentView(R.layout.desserts);
+
+                backButton = (ImageButton) findViewById(R.id.imagebutton_back_desserts);
+                backButton.setOnClickListener(v -> initMenuView());
             }
         });
     }
