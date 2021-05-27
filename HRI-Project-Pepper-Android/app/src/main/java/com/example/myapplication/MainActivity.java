@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;
@@ -53,11 +54,24 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     private ImageButton minusButton5;
     private ImageButton minusButton6;
 
+    // Text views
+    private TextView counter1;
+    private TextView counter2;
+    private TextView counter3;
+    private TextView counter4;
+    private TextView counter5;
+    private TextView counter6;
+
+    //Order
+    private Order order;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         initStartView();
+
+        order = new Order();
 
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
@@ -174,6 +188,23 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
 
                 backButton = (ImageButton) findViewById(R.id.imagebutton_back_mains);
                 backButton.setOnClickListener(v -> initMenuView());
+
+                //Hamburger button
+                counter1 = (TextView) findViewById(R.id.text_counter_hamburger);
+
+                plusButton1 = (ImageButton) findViewById(R.id.imagebutton_hamburger_plus);
+                plusButton1.setOnClickListener(v -> {
+                    order.hamburger.number+=1;
+                    counter1.setText(order.hamburger.num2str());
+                });
+
+                minusButton1 = (ImageButton) findViewById(R.id.imagebutton_hamburger_minus);
+                minusButton1.setOnClickListener(v -> {
+                    if(order.hamburger.number>0){
+                        order.hamburger.number-=1;
+                        counter1.setText(order.hamburger.num2str());
+                    }
+                });
             }
         });
     }

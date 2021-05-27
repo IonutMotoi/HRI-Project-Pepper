@@ -1,9 +1,9 @@
 package com.example.myapplication;
 
 public class FoodItem {
-    final private String name;
-    final private int price;
-    private int number;
+    final public String name;
+    final public int price;
+    public int number;
 
     public FoodItem(String name, int price, int number) {
         this.name = name;
@@ -11,21 +11,10 @@ public class FoodItem {
         this.number = number;
     }
 
-    public String getName() {
-        return name;
+    public String num2str() {
+        return String.valueOf(number);
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int newNumber) {
-        number = newNumber;
-    }
 }
 
 
