@@ -191,6 +191,17 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
 
                 //Hamburger button
                 counter1 = (TextView) findViewById(R.id.text_counter_hamburger);
+                counter1.setText(order.hamburger.num2str());
+                counter2 = (TextView) findViewById(R.id.text_counter_hamburger);
+                counter2.setText(order.hamburger.num2str());
+                counter3 = (TextView) findViewById(R.id.text_counter_hamburger);
+                counter3.setText(order.hamburger.num2str());
+                counter4 = (TextView) findViewById(R.id.text_counter_hamburger);
+                counter4.setText(order.hamburger.num2str());
+                counter5 = (TextView) findViewById(R.id.text_counter_hamburger);
+                counter5.setText(order.hamburger.num2str());
+                counter6 = (TextView) findViewById(R.id.text_counter_hamburger);
+                counter6.setText(order.hamburger.num2str());
 
                 plusButton1 = (ImageButton) findViewById(R.id.imagebutton_hamburger_plus);
                 plusButton1.setOnClickListener(v -> {
