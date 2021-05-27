@@ -5,16 +5,16 @@ public class Order {
     public FoodItem hamburger = new FoodItem("Hamburger", 250, 0);
     public FoodItem taco = new FoodItem("Taco", 250, 0);
     public FoodItem wrap = new FoodItem("Wrap", 250, 0);
-    public FoodItem chicken = new FoodItem("Chicken", 200, 0);
+    public FoodItem chicken = new FoodItem("Chicken wings", 200, 0);
     public FoodItem toast = new FoodItem("Toast", 100, 0);
     public FoodItem pizza = new FoodItem("Pizza", 150, 0);
 
     //Sides
     public FoodItem fries = new FoodItem("Fries", 150, 0);
-    public FoodItem onion = new FoodItem("Onion", 150, 0);
+    public FoodItem onion = new FoodItem("Onion rings", 150, 0);
     public FoodItem sticks = new FoodItem("Sticks", 200, 0);
     public FoodItem nuggets = new FoodItem("Nuggets", 200, 0);
-    public FoodItem wings = new FoodItem("Wings", 250, 0);
+    public FoodItem wings = new FoodItem("Chicken wings", 250, 0);
     public FoodItem salad = new FoodItem("Salad", 250, 0);
 
     //Beverages

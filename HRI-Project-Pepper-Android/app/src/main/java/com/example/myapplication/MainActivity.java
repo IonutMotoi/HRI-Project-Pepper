@@ -20,6 +20,8 @@ import com.aldebaran.qi.sdk.object.conversation.QiChatVariable;
 import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
 import com.aldebaran.qi.sdk.object.conversation.Topic;
 
+import java.lang.reflect.Field;
+
 public class MainActivity  extends RobotActivity implements RobotLifecycleCallbacks {
 
     private static final String TAG ="MainActivity";
@@ -39,6 +41,10 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     private ImageButton sidesButton;
     private ImageButton beveragesButton;
     private ImageButton dessertsButton;
+
+    // Order textviews
+    private TextView orderListTextView;
+    private TextView orderTotalTextView;
 
     // Buttons plus and minus (12)
     private ImageButton plusButton1;
@@ -163,6 +169,16 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
             @Override
             public void run() {
                 setContentView(R.layout.menu);
+
+                orderListTextView = (TextView) findViewById(R.id.text_order_list);
+                orderTotalTextView = (TextView) findViewById(R.id.text_order_total);
+
+//                UpdateOrder();
+//                String orderText;
+//                for(Item)
+//                orderText.concat()
+
+//                orderListTextView.setText();
 
                 mainsButton = (ImageButton) findViewById(R.id.imagebutton_mains);
                 mainsButton.setOnClickListener(v -> initMainsView());
