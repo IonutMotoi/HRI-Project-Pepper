@@ -31,6 +31,9 @@
         android:background="@null"
         app:srcCompat="@drawable/back" />
 
+
+    <!-- Coke -->
+
     <ImageView
         android:id="@+id/image_coke"
         android:layout_width="150dp"
@@ -104,6 +107,7 @@
         app:layout_constraintEnd_toEndOf="@id/image_coke"/>
 
 
+    <!-- Fanta -->
 
     <ImageView
         android:id="@+id/image_fanta"
@@ -119,6 +123,9 @@
         android:scaleY="1.35"
         app:srcCompat="@drawable/fanta" />
 
+
+    <!-- Sprite -->
+
     <ImageView
         android:id="@+id/image_sprite"
         android:layout_width="150dp"
@@ -129,6 +136,9 @@
         app:layout_constraintEnd_toStartOf="@id/image_water"
         app:layout_constraintStart_toEndOf="@id/image_coke"
         app:srcCompat="@drawable/sprite" />
+
+
+    <!-- Tea -->
 
     <ImageView
         android:id="@+id/image_tea"
@@ -141,6 +151,9 @@
         app:layout_constraintEnd_toStartOf="@id/image_beer"
         app:srcCompat="@drawable/tea" />
 
+
+    <!-- Water -->
+
     <ImageView
         android:id="@+id/image_water"
         android:layout_width="150dp"
@@ -151,6 +164,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/image_sprite"
         app:srcCompat="@drawable/water" />
+
+
+    <!-- Beer -->
 
     <ImageView
         android:id="@+id/image_beer"
