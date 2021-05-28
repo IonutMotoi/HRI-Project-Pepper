@@ -14,10 +14,7 @@
         android:textSize="64sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:translationY="-20dp"
-        android:layout_marginTop="30dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/image_sprite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -25,10 +22,8 @@
         android:id="@+id/imagebutton_back_beverages"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:translationY="-20dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintBottom_toTopOf="@id/image_coke"
+        android:translationX="16dp"
+        android:translationY="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:scaleType="fitCenter"
