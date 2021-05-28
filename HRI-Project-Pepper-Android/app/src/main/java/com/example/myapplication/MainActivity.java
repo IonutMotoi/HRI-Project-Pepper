@@ -42,6 +42,8 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     private ImageButton sidesButton;
     private ImageButton beveragesButton;
     private ImageButton dessertsButton;
+    private Button cancelOrderButton;
+    private Button checkoutButton;
 
     // Order TextViews
     private TextView orderListTextView;
@@ -77,8 +79,6 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         super.onCreate(savedInstanceState);
 
         initStartView();
-
-        order = new Order();
 
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
@@ -158,8 +158,11 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
             @Override
             public void run() {
                 setContentView(R.layout.activity_main);
+
                 startOrderButton = (Button) findViewById(R.id.button_start_order);
                 startOrderButton.setOnClickListener(v -> initMenuView());
+                
+                order = new Order();
             }
         });
     }
@@ -172,6 +175,12 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
                 setContentView(R.layout.menu);
 
                 UpdateOrder();
+
+                cancelOrderButton = (Button) findViewById(R.id.button_cancel_order);
+                cancelOrderButton.setOnClickListener(v -> initStartView());
+
+                checkoutButton = (Button) findViewById(R.id.button_checkout);
+                checkoutButton.setOnClickListener(v -> initStartView());
 
                 mainsButton = (ImageButton) findViewById(R.id.imagebutton_mains);
                 mainsButton.setOnClickListener(v -> initMainsView());
