@@ -189,20 +189,11 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     }
 
     public void UpdateOrder() {
-        String orderText = "";
-        int total = 0;
         orderListTextView = (TextView) findViewById(R.id.text_order_list);
         orderTotalTextView = (TextView) findViewById(R.id.text_order_total);
 
-        if(order.hamburger.number > 0) {
-            orderText += order.hamburger.name + " x"  + order.hamburger.num2str() + " --> "
-                    + String.format("%.2f", order.hamburger.number * order.hamburger.price / 100.0f)
-                    + " €\n";
-            total += order.hamburger.number * order.hamburger.price;
-        }
-
-        orderListTextView.setText(orderText);
-        orderTotalTextView.setText("Total: " + String.format("%.2f", total / 100.0f) + " €");
+        orderListTextView.setText(order.getOrderText());
+        orderTotalTextView.setText("Total: " + String.format("%.2f", order.getTotal() / 100.0f) + " €");
     }
 
     /** Called when the user wants to start the order */

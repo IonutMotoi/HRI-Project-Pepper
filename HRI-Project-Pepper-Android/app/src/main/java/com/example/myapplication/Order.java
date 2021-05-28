@@ -32,5 +32,49 @@ public class Order {
     public FoodItem crepes = new FoodItem("Crepes", 300, 0);
     public FoodItem icecream = new FoodItem("Ice Cream", 100, 0);
     public FoodItem pancake = new FoodItem("Pancake", 200, 0);
+
+    public String getOrderText() {
+        String str = "";
+
+        str += hamburger.getOrderString() + taco.getOrderString()
+                + wrap.getOrderString() + chicken.getOrderString()
+                + toast.getOrderString() + pizza.getOrderString();
+
+        str += fries.getOrderString() + onion.getOrderString()
+                + sticks.getOrderString() + nuggets.getOrderString()
+                + wings.getOrderString() + salad.getOrderString();
+
+        str += coke.getOrderString() + sprite.getOrderString()
+                + water.getOrderString() + fanta.getOrderString()
+                + tea.getOrderString() + beer.getOrderString();
+
+        str += cake.getOrderString() + donut.getOrderString()
+                + milkshake.getOrderString() + crepes.getOrderString()
+                + icecream.getOrderString() + pancake.getOrderString();
+
+        return str;
+    }
+
+    public int getTotal() {
+        int total = 0;
+
+        total += hamburger.getSubtotal() + taco.getSubtotal()
+                + wrap.getSubtotal() + chicken.getSubtotal()
+                + toast.getSubtotal() + pizza.getSubtotal();
+
+        total += fries.getSubtotal() + onion.getSubtotal()
+                + sticks.getSubtotal() + nuggets.getSubtotal()
+                + wings.getSubtotal() + salad.getSubtotal();
+
+        total += coke.getSubtotal() + sprite.getSubtotal()
+                + water.getSubtotal() + fanta.getSubtotal()
+                + tea.getSubtotal() + beer.getSubtotal();
+
+        total += cake.getSubtotal() + donut.getSubtotal()
+                + milkshake.getSubtotal() + crepes.getSubtotal()
+                + icecream.getSubtotal() + pancake.getSubtotal();
+
+        return total;
+    }
 }
 
