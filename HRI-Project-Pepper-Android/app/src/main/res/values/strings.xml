@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="checkout">CHECKOUT</string>
+    <string name="cancel_order">CANCEL ORDER</string>
+    <string name="total">Total:</string>
+    <string name="order">ORDER</string>
+    <string name="desserts">Desserts</string>
+    <string name="beverages">Beverages</string>
+    <string name="sides">Sides</string>
+    <string name="mains">Mains</string>
+    <string name="menu">MENU</string>
 </resources>
