@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
+
 public class FoodItem {
     final private String name;
     final private int price;
@@ -19,6 +21,11 @@ public class FoodItem {
         return price * number;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    @SuppressLint("DefaultLocale")
     public String getOrderString() {
         String str = "";
         if(number > 0) {
