@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -17,10 +16,15 @@ import com.aldebaran.qi.sdk.builder.ChatBuilder;
 import com.aldebaran.qi.sdk.builder.QiChatbotBuilder;
 import com.aldebaran.qi.sdk.builder.TopicBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
+import com.aldebaran.qi.sdk.object.conversation.Bookmark;
+import com.aldebaran.qi.sdk.object.conversation.BookmarkStatus;
 import com.aldebaran.qi.sdk.object.conversation.Chat;
 import com.aldebaran.qi.sdk.object.conversation.QiChatVariable;
 import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
 import com.aldebaran.qi.sdk.object.conversation.Topic;
+import com.aldebaran.qi.sdk.object.conversation.TopicStatus;
+
+import java.util.Map;
 
 public class MainActivity  extends RobotActivity implements RobotLifecycleCallbacks {
 
@@ -32,10 +36,24 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     // Store the QiChatbot
     private QiChatbot qiChatbot;
 
-    // Store the Chat action.
+    // Store the Chat Action.
     private Chat chatAction;
 
+    // Store the Chat Future
     private Future<Void> chatFuture;
+
+    // Chat variables
+    private QiChatVariable foodVariable;
+    private QiChatVariable numberVariable;
+
+    // Chat bookmarks
+    private BookmarkStatus menuBookmarkStatus;
+
+    // Chat topics
+    private Topic topicGreetings;
+    private TopicStatus topicGreetingsStatus;
+    private Topic topicMenu;
+    private TopicStatus topicMenuStatus;
 
     // Buttons
     private Button startOrderButton;
@@ -117,6 +135,11 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         if (chatAction != null) {
             chatAction.removeAllOnStartedListeners();
         }
+
+        // Remove the listeners on each BookmarkStatus
+        if (menuBookmarkStatus != null) {
+            menuBookmarkStatus.removeAllOnReachedListeners();
+        }
     }
 
     @Override
@@ -125,17 +148,20 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     }
 
     public void initActions() {
-        // Create a chat topic
-        Topic topic = TopicBuilder.with(qiContext) // Create the builder using the QiContext.
+        // Create chat topics
+        topicGreetings = TopicBuilder.with(qiContext) // Create the builder using the QiContext.
                 .withResource(R.raw.greetings) // Set the topic resource.
                 .build(); // Build the topic.
+        topicMenu = TopicBuilder.with(qiContext) // Create the builder using the QiContext.
+                .withResource(R.raw.menu) // Set the topic resource.
+                .build(); // Build the topic.
 
-        // Create a new QiChatbot.
+        // Create a new QiChatbot
         qiChatbot = QiChatbotBuilder.with(qiContext)
-                .withTopic(topic)
+                .withTopic(topicGreetings, topicMenu)
                 .build();
 
-        // Create a new Chat action.
+        // Create a new Chat action
         chatAction = ChatBuilder.with(qiContext)
                 .withChatbot(qiChatbot)
                 .build();
@@ -144,11 +170,12 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         chatAction.addOnStartedListener(() -> Log.i(TAG, "Discussion started."));
 
         initChatVariables();
+        initBookmarks();
         initAnimations();
     }
 
     void initChatVariables() {
-        // Set up a listener for a chat variable
+        // Start
         QiChatVariable startVariable = qiChatbot.variable("Start");
         startVariable.addOnValueChangedListener(
                 currentValue -> {
@@ -158,6 +185,43 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
                     }
                 }
         );
+
+        // Food
+        foodVariable = qiChatbot.variable("Food");
+        foodVariable.addOnValueChangedListener(
+                currentValue -> {
+                    if (currentValue.equals("true")) {
+                        Log.i(TAG, "Chat var Food: " + currentValue);
+                        order.getFoodItem(currentValue).number = Integer.parseInt(numberVariable.getValue());
+                    }
+                }
+        );
+
+        // Number
+        numberVariable = qiChatbot.variable("Number");
+        numberVariable.addOnValueChangedListener(
+                currentValue -> {
+                    if (currentValue.equals("true")) {
+                        Log.i(TAG, "Chat var Start: " + currentValue);
+                        initMenuView();
+                    }
+                }
+        );
+    }
+
+    public void initBookmarks() {
+        // Get the bookmarks from the topic
+        Map<String, Bookmark> bookmarks = topicGreetings.getBookmarks();
+
+        // Get the bookmarks
+        Bookmark menuBookmark = bookmarks.get("menu");
+
+        // Create a BookmarkStatus for each bookmark
+        menuBookmarkStatus = qiChatbot.bookmarkStatus(menuBookmark);
+
+        menuBookmarkStatus.addOnReachedListener(() -> {
+            initMenuView();
+        });
     }
 
     public void initAnimations() {
