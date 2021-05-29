@@ -22,7 +22,6 @@ import com.aldebaran.qi.sdk.object.conversation.Chat;
 import com.aldebaran.qi.sdk.object.conversation.QiChatVariable;
 import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
 import com.aldebaran.qi.sdk.object.conversation.Topic;
-import com.aldebaran.qi.sdk.object.conversation.TopicStatus;
 
 import java.util.Map;
 
@@ -51,9 +50,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
 
     // Chat topics
     private Topic topicGreetings;
-    private TopicStatus topicGreetingsStatus;
     private Topic topicMenu;
-    private TopicStatus topicMenuStatus;
 
     // Buttons
     private Button startOrderButton;
@@ -190,9 +187,10 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         foodVariable = qiChatbot.variable("Food");
         foodVariable.addOnValueChangedListener(
                 currentValue -> {
-                    if (currentValue.equals("true")) {
+                    if (!order.getFoodItem(currentValue).getName().equals("null")) {
                         Log.i(TAG, "Chat var Food: " + currentValue);
-                        order.getFoodItem(currentValue).number = Integer.parseInt(numberVariable.getValue());
+                        order.getFoodItem(currentValue).number = numberStringToInt(numberVariable.getValue());
+                        initMenuView();
                     }
                 }
         );
@@ -201,10 +199,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         numberVariable = qiChatbot.variable("Number");
         numberVariable.addOnValueChangedListener(
                 currentValue -> {
-                    if (currentValue.equals("true")) {
-                        Log.i(TAG, "Chat var Start: " + currentValue);
-                        initMenuView();
-                    }
+                    Log.i(TAG, "Chat var Number: " + numberStringToInt(currentValue));
                 }
         );
     }
@@ -219,9 +214,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         // Create a BookmarkStatus for each bookmark
         menuBookmarkStatus = qiChatbot.bookmarkStatus(menuBookmark);
 
-        menuBookmarkStatus.addOnReachedListener(() -> {
-            initMenuView();
-        });
+        menuBookmarkStatus.addOnReachedListener(this::initMenuView);
     }
 
     public void initAnimations() {
@@ -711,5 +704,21 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     public void restartOrder() {
         chatFuture.requestCancellation();
         this.recreate();
+    }
+
+    public int numberStringToInt(String str) {
+        switch (str) {
+            case "one": return 1;
+            case "two": return 2;
+            case "three": return 3;
+            case "four": return 4;
+            case "five": return 5;
+            case "six": return 6;
+            case "seven": return 7;
+            case "eight": return 8;
+            case "nine": return 9;
+            case "ten": return 10;
+            default: return 0;
+        }
     }
 }

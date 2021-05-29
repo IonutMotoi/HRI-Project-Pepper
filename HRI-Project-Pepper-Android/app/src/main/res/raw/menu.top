@@ -1,8 +1,15 @@
 topic: ~menu()
 
 # Concepts
+concept:(want) [want "would like" "'d like"]
+concept:(number) [one two three four five six seven eight nine ten]
+concept:(hamburger) [hamburger hamburgers] $Food=Hamburger
+concept:(taco) [taco tacos] $Food=Taco
+concept:(food) [~hamburger ~taco]
 
 # Rules
+u:(I ~want _~number ~food) Sure! I added them to your order $Number=$1
+
 
 # Proposals
 proposal: Here are the categories

@@ -62,7 +62,7 @@ public class Order {
                 return foodItem;
             }
         }
-        return new FoodItem("Null", 0, 0);
+        return new FoodItem("null", 0, 0);
     }
 }
 
