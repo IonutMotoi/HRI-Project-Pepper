@@ -39,8 +39,8 @@ concept:(food) [~hamburger ~taco ~wrap ~chicken ~toast ~pizza
                 ~cake ~donut ~milkshake ~crepes ~ice ~pancake]
 
 # Rules
-u:({I} {~want} {[a an "a portion of" "a serving of"]} ~food {please}) Sure! I added them to your order $Number=one
-u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please}) Sure! I added them to your order $Number=$1
+u:({I} {~want} {[a an "a portion of" "a serving of"]} ~food {please}) Sure! I added them to your order $Number=one %additem
+u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please}) Sure! I added them to your order $Number=$1 %additem
 
 # Proposals
 proposal: Here are the categories

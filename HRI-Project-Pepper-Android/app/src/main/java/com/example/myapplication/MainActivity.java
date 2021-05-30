@@ -47,6 +47,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
 
     // Chat bookmarks
     private BookmarkStatus menuBookmarkStatus;
+    private BookmarkStatus addItemBookmarkStatus;
 
     // Chat topics
     private Topic topicGreetings;
@@ -134,9 +135,8 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         }
 
         // Remove the listeners on each BookmarkStatus
-        if (menuBookmarkStatus != null) {
-            menuBookmarkStatus.removeAllOnReachedListeners();
-        }
+        if (menuBookmarkStatus != null) {menuBookmarkStatus.removeAllOnReachedListeners();}
+        if (addItemBookmarkStatus != null) {addItemBookmarkStatus.removeAllOnReachedListeners();}
     }
 
     @Override
@@ -185,39 +185,45 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
 
         // Food
         foodVariable = qiChatbot.variable("Food");
+
+        // Only for log
         foodVariable.addOnValueChangedListener(
-                currentFoodValue -> {
-                    Log.i(TAG, "Chat var Food: " + currentFoodValue);
-                    // Go to the View containing the requested food
-                    initCategoryFromName(currentFoodValue);
-                }
+                currentFoodValue -> Log.i(TAG, "Chat var Food: " + currentFoodValue)
         );
 
         // Number
         numberVariable = qiChatbot.variable("Number");
         numberVariable.addOnValueChangedListener(
-                currentNumberValue -> {
-                    Log.i(TAG, "Chat var Number: " + numberStringToInt(currentNumberValue));
-
-                    // Add item/items to order
-                    if (!order.getFoodItem(foodVariable.getValue()).getName().equals("null")) {
-                        order.getFoodItem(foodVariable.getValue()).number = numberStringToInt(currentNumberValue);
-                    }
-                }
+                currentNumberValue -> Log.i(TAG, "Chat var Number: " + numberStringToInt(currentNumberValue))
         );
     }
 
     public void initBookmarks() {
         // Get the bookmarks from the topic
-        Map<String, Bookmark> bookmarks = topicGreetings.getBookmarks();
+        Map<String, Bookmark> bookmarksGreetings = topicGreetings.getBookmarks();
+        Map<String, Bookmark> bookmarksMenu = topicMenu.getBookmarks();
 
         // Get the bookmarks
-        Bookmark menuBookmark = bookmarks.get("menu");
+        Bookmark menuBookmark = bookmarksGreetings.get("menu");
+        Bookmark addItemBookmark = bookmarksMenu.get("additem");
 
         // Create a BookmarkStatus for each bookmark
         menuBookmarkStatus = qiChatbot.bookmarkStatus(menuBookmark);
+        addItemBookmarkStatus = qiChatbot.bookmarkStatus(addItemBookmark);
 
         menuBookmarkStatus.addOnReachedListener(this::initMenuView);
+        addItemBookmarkStatus.addOnReachedListener(() -> {
+            String food = foodVariable.getValue();
+            int number = numberStringToInt(numberVariable.getValue());
+
+            // Add item/items to order
+            if (!order.getFoodItem(food).getName().equals("null")) {
+                order.getFoodItem(food).number = number;
+            }
+
+            // Go to the View containing the requested food
+            initCategoryFromName(food);
+        });
     }
 
     public void initAnimations() {
