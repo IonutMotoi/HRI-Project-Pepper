@@ -1,14 +1,45 @@
 topic: ~menu()
 
 # Concepts
-concept:(want) [want "would like" "'d like"]
+concept:(want) [want "would like" "'d like" wish]
 concept:(number) [one two three four five six seven eight nine ten]
+concept:(propose) ["Can i suggest you" "May i ask you" "Would you like"]
+
 concept:(hamburger) [hamburger hamburgers] $Food=Hamburger
 concept:(taco) [taco tacos] $Food=Taco
-concept:(food) [~hamburger ~taco]
+concept:(wrap) [wrap wraps] $Food=Wrap
+concept:(chicken) [chicken chickens] $Food=Chicken
+concept:(toast) [toast toasts] $Food=Toast
+concept:(pizza) [pizza pizzas] $Food=Pizza
+
+concept:(fries) [fries] $Food=Fries
+concept:(onion) ["onion rings"] $Food=Onion
+concept:(mozzarella) ["mozzarella sticks"] $Food=Mozzarella
+concept:(nuggets) [nuggets] $Food=Nuggets
+concept:(wings) ["chicken wings"] $Food=Wings
+concept:(salad) [salad salads] $Food=Salad
+
+concept:(coke) [coke cokes] $Food=Coke
+concept:(sprite) [sprite sprites] $Food=Sprite
+concept:(water) [water waters] $Food=Water
+concept:(fanta) [fanta fantas] $Food=Fanta
+concept:(tea) [tea teas] $Food=Tea
+concept:(beer) [beer beers] $Food=Beer
+
+concept:(cake) [cake cakes] $Food=Cake
+concept:(donut) [donut donuts] $Food=Donut
+concept:(milkshake) [milkshake milkshakes] $Food=Milkshake
+concept:(crepes) [crepe crepes] $Food=Crepes
+concept:(ice) ["ice cream" "ice creams"] $Food=Ice
+concept:(pancake) [pancake pancakes] $Food=Pancake
+
+concept:(food) [~hamburger ~taco ~wrap ~chicken ~toast ~pizza
+                ~fries ~onion ~mozzarella ~nuggets ~wings ~salad
+                ~coke ~sprite ~water ~fanta ~tea ~beer
+                ~cake ~donut ~milkshake ~crepes ~ice ~pancake]
 
 # Rules
-u:(I ~want _~number ~food) Sure! I added them to your order $Number=$1
+u:(I ~want {a portion of} {a serving of} {_~number} {portions of} {servings of} ~food) Sure! I added them to your order $Number=$1
 
 
 # Proposals
