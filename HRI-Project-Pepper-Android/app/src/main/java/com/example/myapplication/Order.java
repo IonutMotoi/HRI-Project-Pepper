@@ -7,7 +7,7 @@ public class Order {
         new FoodItem("Hamburger", 250, 0), // 0
         new FoodItem("Taco", 250, 0), // 1
         new FoodItem("Wrap", 250, 0), // 2
-        new FoodItem("Chicken wings", 200, 0), // 3
+        new FoodItem("Chicken", 200, 0), // 3
         new FoodItem("Toast", 100, 0), // 4
         new FoodItem("Pizza", 150, 0), // 5
 
@@ -32,7 +32,7 @@ public class Order {
         new FoodItem("Donut", 150, 0), // 19
         new FoodItem("Milkshake", 150, 0), // 20
         new FoodItem("Crepes", 300, 0), // 21
-        new FoodItem("Ice Cream", 100, 0), // 22
+        new FoodItem("Ice cream", 100, 0), // 22
         new FoodItem("Pancake", 200, 0) // 23
     };
 

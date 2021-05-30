@@ -186,20 +186,23 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         // Food
         foodVariable = qiChatbot.variable("Food");
         foodVariable.addOnValueChangedListener(
-                currentValue -> {
-                    if (!order.getFoodItem(currentValue).getName().equals("null")) {
-                        Log.i(TAG, "Chat var Food: " + currentValue);
-                        order.getFoodItem(currentValue).number = numberStringToInt(numberVariable.getValue());
-                        initMenuView();
-                    }
+                currentFoodValue -> {
+                    Log.i(TAG, "Chat var Food: " + currentFoodValue);
+                    // Go to the View containing the requested food
+                    initCategoryFromName(currentFoodValue);
                 }
         );
 
         // Number
         numberVariable = qiChatbot.variable("Number");
         numberVariable.addOnValueChangedListener(
-                currentValue -> {
-                    Log.i(TAG, "Chat var Number: " + numberStringToInt(currentValue));
+                currentNumberValue -> {
+                    Log.i(TAG, "Chat var Number: " + numberStringToInt(currentNumberValue));
+
+                    // Add item/items to order
+                    if (!order.getFoodItem(foodVariable.getValue()).getName().equals("null")) {
+                        order.getFoodItem(foodVariable.getValue()).number = numberStringToInt(currentNumberValue);
+                    }
                 }
         );
     }
@@ -719,6 +722,52 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
             case "nine": return 9;
             case "ten": return 10;
             default: return 0;
+        }
+    }
+
+    public void initCategoryFromName(String str) {
+        switch (str) {
+            case "Hamburger":
+            case "Taco":
+            case "Wrap":
+            case "Chicken":
+            case "Toast":
+            case "Pizza": {
+                initMainsView();
+                break;
+            }
+
+            case "Fries":
+            case "Onion rings":
+            case "Mozzarella":
+            case "Nuggets":
+            case "Chicken wings":
+            case "Salad": {
+                initSidesView();
+                break;
+            }
+
+            case "Coke":
+            case "Sprite":
+            case "Water":
+            case "Fanta":
+            case "Tea":
+            case "Beer": {
+                initBeveragesView();
+                break;
+            }
+
+            case "Cake":
+            case "Donut":
+            case "Milkshake":
+            case "Crepes":
+            case "Ice cream":
+            case "Pancake": {
+                initDessertsView();
+                break;
+            }
+
+            default: initMenuView();
         }
     }
 }

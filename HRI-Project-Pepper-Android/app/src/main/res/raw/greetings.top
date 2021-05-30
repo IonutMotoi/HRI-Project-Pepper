@@ -1,15 +1,12 @@
 topic: ~greetings()
 
 # Concepts
-concept:(hello) ^rand[Hello Hi Hey Greetings Wellcome]
+concept:(hello) ^rand[Hello Hi Hey Greetings Welcome]
 concept:(want) [want "would like" "'d like" wish]
 concept:(ordering) ["{I} {~want} {to} order {something} {to} {[eat drink]}"]
 concept:(order-ask) ^rand["Would you like to order {something}?"]
 concept:(yes) [Yes Sure Fine Ok Yeah]
 concept:(no) [No "Not yet" "Don't Knkow" "Not sure"]
-
-$Food=null
-$Number=0
 
 # Rules
 u:(~hello) ~hello ^nextProposal
