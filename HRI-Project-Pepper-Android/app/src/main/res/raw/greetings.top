@@ -9,7 +9,7 @@ concept:(yes) [Yes Sure Fine Ok Yeah]
 concept:(no) [No "Not yet" "Don't Knkow" "Not sure"]
 
 # Rules
-u:(~hello) ~hello ^nextProposal
+u:(~hello) ~hello %hello10Anim ^nextProposal
 u:(~ordering) Sure! $Start=true ^topic(menu) %menu
 
 # Proposals

@@ -19,12 +19,12 @@ concept:(nuggets) [nuggets] $Food=Nuggets
 concept:(wings) ["chicken wings"] $Food=Chicken wings
 concept:(salad) [salad salads] $Food=Salad
 
-concept:(coke) [coke cokes] $Food=Coke
-concept:(sprite) [sprite sprites] $Food=Sprite
-concept:(water) [water waters] $Food=Water
-concept:(fanta) [fanta fantas] $Food=Fanta
-concept:(tea) [tea teas] $Food=Tea
-concept:(beer) [beer beers] $Food=Beer
+concept:(coke) [coke cokes] $Food=Coke $Drink=True
+concept:(sprite) [sprite sprites] $Food=Sprite $Drink=True
+concept:(water) [water waters] $Food=Water $Drink=True
+concept:(fanta) [fanta fantas] $Food=Fanta $Drink=True
+concept:(tea) [tea teas] $Food=Tea $Drink=True
+concept:(beer) [beer beers] $Food=Beer $Drink=True
 
 concept:(cake) [cake cakes] $Food=Cake
 concept:(donut) [donut donuts] $Food=Donut
@@ -39,10 +39,17 @@ concept:(food) [~hamburger ~taco ~wrap ~chicken ~toast ~pizza
                 ~cake ~donut ~milkshake ~crepes ~ice ~pancake]
 
 # Rules
-u:({I} {~want} {[a an "a portion of" "a serving of"]} ~food {please}) Sure! I added them to your order $Number=one %additem
-u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please}) Sure! I added them to your order $Number=$1 %additem
+u:({I} {~want} {[a an "a portion of" "a serving of"]} ~food {please}) Sure! I added it to your order $Number=one %additem ^enableThenGoto(sameCategory)
+u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please}) Sure! I added them to your order $Number=$1 %additem ^enableThenGoto(sameCategory)
+u:({I} {~want} {to} checkout {please}) Ok, this is you order %goToMenu
+    u1:($Drink==False) You haven't added a drink to your order. Do you want to add one?
+        u2:(~yes) What drink do you want?
+        u2:(~no) Your order is complete
+    u1:($Drink==True) Your order is complete
 
 # Proposals
-proposal: Here are the categories
-
+proposal: Here are the categories %showTablet2Anim $Drink=False
+proposal: %sameCategory Do you want something else from this category?
+    u1:(~yes) Ok, what else do you want to order?
+    u1:(~no) Fine, then I'll bring you the previous menu %goToMenu
 

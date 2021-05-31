@@ -8,14 +8,20 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.RawRes;
+
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
+import com.aldebaran.qi.sdk.builder.AnimateBuilder;
+import com.aldebaran.qi.sdk.builder.AnimationBuilder;
 import com.aldebaran.qi.sdk.builder.ChatBuilder;
 import com.aldebaran.qi.sdk.builder.QiChatbotBuilder;
 import com.aldebaran.qi.sdk.builder.TopicBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
+import com.aldebaran.qi.sdk.object.actuation.Animate;
+import com.aldebaran.qi.sdk.object.actuation.Animation;
 import com.aldebaran.qi.sdk.object.conversation.Bookmark;
 import com.aldebaran.qi.sdk.object.conversation.BookmarkStatus;
 import com.aldebaran.qi.sdk.object.conversation.Chat;
@@ -45,9 +51,14 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     private QiChatVariable foodVariable;
     private QiChatVariable numberVariable;
 
-    // Chat bookmarks
+    // Chat Bookmarks
+    Map<String, Bookmark> bookmarksGreetings;
+    Map<String, Bookmark> bookmarksMenu;
+
+    // Chat Bookmark Status
     private BookmarkStatus menuBookmarkStatus;
     private BookmarkStatus addItemBookmarkStatus;
+    private BookmarkStatus goToMenuBookmarkStatus;
 
     // Chat topics
     private Topic topicGreetings;
@@ -137,6 +148,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         // Remove the listeners on each BookmarkStatus
         if (menuBookmarkStatus != null) {menuBookmarkStatus.removeAllOnReachedListeners();}
         if (addItemBookmarkStatus != null) {addItemBookmarkStatus.removeAllOnReachedListeners();}
+        if (goToMenuBookmarkStatus != null) {goToMenuBookmarkStatus.removeAllOnReachedListeners();}
     }
 
     @Override
@@ -200,18 +212,21 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
 
     public void initBookmarks() {
         // Get the bookmarks from the topic
-        Map<String, Bookmark> bookmarksGreetings = topicGreetings.getBookmarks();
-        Map<String, Bookmark> bookmarksMenu = topicMenu.getBookmarks();
+        bookmarksGreetings = topicGreetings.getBookmarks();
+        bookmarksMenu = topicMenu.getBookmarks();
 
         // Get the bookmarks
         Bookmark menuBookmark = bookmarksGreetings.get("menu");
         Bookmark addItemBookmark = bookmarksMenu.get("additem");
+        Bookmark goToMenuBookmark = bookmarksMenu.get("goToMenu");
 
         // Create a BookmarkStatus for each bookmark
         menuBookmarkStatus = qiChatbot.bookmarkStatus(menuBookmark);
         addItemBookmarkStatus = qiChatbot.bookmarkStatus(addItemBookmark);
+        goToMenuBookmarkStatus = qiChatbot.bookmarkStatus(goToMenuBookmark);
 
         menuBookmarkStatus.addOnReachedListener(this::initMenuView);
+
         addItemBookmarkStatus.addOnReachedListener(() -> {
             String food = foodVariable.getValue();
             int number = numberStringToInt(numberVariable.getValue());
@@ -224,10 +239,35 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
             // Go to the View containing the requested food
             initCategoryFromName(food);
         });
+
+        goToMenuBookmarkStatus.addOnReachedListener(this::initMenuView);
     }
 
     public void initAnimations() {
+        // Show tablet 2
+        Bookmark showTablet2AnimBookmark = bookmarksMenu.get("showTablet2Anim");
+        BookmarkStatus showTablet2AnimBookmarkStatus = qiChatbot.bookmarkStatus(showTablet2AnimBookmark);
+        showTablet2AnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.show_tablet_a002, qiContext));
 
+        // Hello 10
+        Bookmark hello10AnimBookmark = bookmarksGreetings.get("hello10Anim");
+        BookmarkStatus hello10AnimBookmarkStatus = qiChatbot.bookmarkStatus(hello10AnimBookmark);
+        hello10AnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.hello_a010, qiContext));
+    }
+
+    void runAnimation(@RawRes Integer animResource, QiContext qiContext) {
+        // Create an animation from the mimic resource.
+        Animation animation = AnimationBuilder.with(qiContext)
+                .withResources(animResource)
+                .build();
+
+        // Create an animate action.
+        Animate animate = AnimateBuilder.with(qiContext)
+                .withAnimation(animation)
+                .build();
+
+        // Run the animate action asynchronously.
+        animate.async().run();
     }
 
     public void initStartView() {
