@@ -257,10 +257,10 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         });
 
         goToMenuBookmarkStatus.addOnReachedListener(this::initMenuView);
-        goToMenuBookmarkStatus.addOnReachedListener(this::initMainsView);
-        goToMenuBookmarkStatus.addOnReachedListener(this::initSidesView);
-        goToMenuBookmarkStatus.addOnReachedListener(this::initBeveragesView);
-        goToMenuBookmarkStatus.addOnReachedListener(this::initDessertsView);
+        goToMainsBookmarkStatus.addOnReachedListener(this::initMainsView);
+        goToSidesBookmarkStatus.addOnReachedListener(this::initSidesView);
+        goToBeveragesBookmarkStatus.addOnReachedListener(this::initBeveragesView);
+        goToDessertsBookmarkStatus.addOnReachedListener(this::initDessertsView);
     }
 
     public void initAnimations() {
@@ -273,6 +273,16 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         Bookmark hello10AnimBookmark = bookmarksGreetings.get("hello10Anim");
         BookmarkStatus hello10AnimBookmarkStatus = qiChatbot.bookmarkStatus(hello10AnimBookmark);
         hello10AnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.hello_a010, qiContext));
+
+        // Raise left hand 1
+        Bookmark raiseLeftHand1AnimBookmark = bookmarksMenu.get("raiseLeftHand1Anim");
+        BookmarkStatus raiseLeftHand1AnimBookmarkStatus = qiChatbot.bookmarkStatus(raiseLeftHand1AnimBookmark);
+        raiseLeftHand1AnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.raise_left_hand_so_a001, qiContext));
+
+        // Question right hand 1
+        Bookmark questionRightHand1AnimBookmark = bookmarksMenu.get("questionRightHand1Anim");
+        BookmarkStatus questionRightHand1AnimBookmarkStatus = qiChatbot.bookmarkStatus(questionRightHand1AnimBookmark);
+        questionRightHand1AnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.question_right_hand_a001, qiContext));
     }
 
     void runAnimation(@RawRes Integer animResource, QiContext qiContext) {
