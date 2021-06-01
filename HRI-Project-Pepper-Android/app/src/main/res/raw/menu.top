@@ -38,18 +38,31 @@ concept:(food) [~hamburger ~taco ~wrap ~chicken ~toast ~pizza
                 ~coke ~sprite ~water ~fanta ~tea ~beer
                 ~cake ~donut ~milkshake ~crepes ~ice ~pancake]
 
+concept:(mains) [mains]
+concept:(sides) [sides]
+concept:(beverages) [beverages drinks]
+concept:(desserts) [desserts cakes sweet]
+
+
 # Rules
-u:({I} {~want} {[a an "a portion of" "a serving of"]} ~food {please}) Sure! I added it to your order $Number=one %additem ^enableThenGoto(sameCategory)
-u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please}) Sure! I added them to your order $Number=$1 %additem ^enableThenGoto(sameCategory)
-u:({I} {~want} {to} checkout {please}) Ok, this is you order %goToMenu
-    u1:($Drink==False) You haven't added a drink to your order. Do you want to add one?
-        u2:(~yes) What drink do you want?
-        u2:(~no) Your order is complete
-    u1:($Drink==True) Your order is complete
+u:({I} {~want} {[a an "a portion of" "a serving of"]} ~food {please}) Sure! I added it to your order $Number=one %addItem ^enableThenGoto(sameCategory)
+u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please}) Sure! I added them to your order $Number=$1 %addItem ^enableThenGoto(sameCategory)
+u:({I} {~want} {to} checkout {please}) Ok, this is you order. %goToMenu ^enableThenGoto(checkout)
+u:(e:Dialog/NotUnderstood) I don't understand
+u:({I} {~want} {to} {see} {the} ~mains {please}) Here are the mains %goToMains
+u:({I} {~want} {to} {see} {the} ~sides {please}) Here are the mains %goToSides
+u:({I} {~want} {to} {see} {the} ~beverages {please}) Here are the mains %goToBeverages
+u:({I} {~want} {to} {see} {the} ~desserts {please}) Here are the mains %goToDesserts
+
 
 # Proposals
 proposal: Here are the categories %showTablet2Anim $Drink=False
+
 proposal: %sameCategory Do you want something else from this category?
     u1:(~yes) Ok, what else do you want to order?
     u1:(~no) Fine, then I'll bring you the previous menu %goToMenu
 
+proposal: %checkout You haven't added a drink to your order. Do you want to add one? $Drink==False
+    u1:(~yes) What drink do you want?
+    u1:(~no) Your order is complete
+proposal: %checkout Your order is complete $Drink==True

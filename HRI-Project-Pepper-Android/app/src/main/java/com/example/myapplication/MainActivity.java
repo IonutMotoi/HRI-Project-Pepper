@@ -59,6 +59,10 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     private BookmarkStatus menuBookmarkStatus;
     private BookmarkStatus addItemBookmarkStatus;
     private BookmarkStatus goToMenuBookmarkStatus;
+    private BookmarkStatus goToMainsBookmarkStatus;
+    private BookmarkStatus goToSidesBookmarkStatus;
+    private BookmarkStatus goToBeveragesBookmarkStatus;
+    private BookmarkStatus goToDessertsBookmarkStatus;
 
     // Chat topics
     private Topic topicGreetings;
@@ -149,6 +153,10 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         if (menuBookmarkStatus != null) {menuBookmarkStatus.removeAllOnReachedListeners();}
         if (addItemBookmarkStatus != null) {addItemBookmarkStatus.removeAllOnReachedListeners();}
         if (goToMenuBookmarkStatus != null) {goToMenuBookmarkStatus.removeAllOnReachedListeners();}
+        if (goToMenuBookmarkStatus != null) {goToMenuBookmarkStatus.removeAllOnReachedListeners();}
+        if (goToMenuBookmarkStatus != null) {goToMenuBookmarkStatus.removeAllOnReachedListeners();}
+        if (goToMenuBookmarkStatus != null) {goToMenuBookmarkStatus.removeAllOnReachedListeners();}
+        if (goToMenuBookmarkStatus != null) {goToMenuBookmarkStatus.removeAllOnReachedListeners();}
     }
 
     @Override
@@ -217,13 +225,21 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
 
         // Get the bookmarks
         Bookmark menuBookmark = bookmarksGreetings.get("menu");
-        Bookmark addItemBookmark = bookmarksMenu.get("additem");
+        Bookmark addItemBookmark = bookmarksMenu.get("addItem");
         Bookmark goToMenuBookmark = bookmarksMenu.get("goToMenu");
+        Bookmark goToMainsBookmark = bookmarksMenu.get("goToMains");
+        Bookmark goToSidesBookmark = bookmarksMenu.get("goToSides");
+        Bookmark goToBeveragesBookmark = bookmarksMenu.get("goToBeverages");
+        Bookmark goToDessertsBookmark = bookmarksMenu.get("goToDesserts");
 
         // Create a BookmarkStatus for each bookmark
         menuBookmarkStatus = qiChatbot.bookmarkStatus(menuBookmark);
         addItemBookmarkStatus = qiChatbot.bookmarkStatus(addItemBookmark);
         goToMenuBookmarkStatus = qiChatbot.bookmarkStatus(goToMenuBookmark);
+        goToMainsBookmarkStatus = qiChatbot.bookmarkStatus(goToMainsBookmark);
+        goToSidesBookmarkStatus = qiChatbot.bookmarkStatus(goToSidesBookmark);
+        goToBeveragesBookmarkStatus = qiChatbot.bookmarkStatus(goToBeveragesBookmark);
+        goToDessertsBookmarkStatus = qiChatbot.bookmarkStatus(goToDessertsBookmark);
 
         menuBookmarkStatus.addOnReachedListener(this::initMenuView);
 
@@ -241,6 +257,10 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         });
 
         goToMenuBookmarkStatus.addOnReachedListener(this::initMenuView);
+        goToMenuBookmarkStatus.addOnReachedListener(this::initMainsView);
+        goToMenuBookmarkStatus.addOnReachedListener(this::initSidesView);
+        goToMenuBookmarkStatus.addOnReachedListener(this::initBeveragesView);
+        goToMenuBookmarkStatus.addOnReachedListener(this::initDessertsView);
     }
 
     public void initAnimations() {
