@@ -55,6 +55,7 @@ u:({I} {~want} {to} {see} {the} ~beverages {please}) Here are the mains %goToBev
 u:({I} {~want} {to} {see} {the} ~desserts {please}) Here are the mains %goToDesserts
 
 
+
 # Proposals
 proposal: Here are the categories %showTablet2Anim $Drink=False
 
@@ -66,3 +67,7 @@ proposal: %checkout You haven't added a drink to your order. Do you want to add 
     u1:(~yes) What drink do you want?
     u1:(~no) Your order is complete
 proposal: %checkout Your order is complete $Drink==True
+
+concept:(select) [see look select go check enter show change switch]
+
+u:({I} {~want} {to} {~select} {to} ~category) Sure, here it is
