@@ -47,9 +47,14 @@ u:({I} {~want} {to} checkout {please}) Ok, this is you order %goToMenu
         u2:(~no) Your order is complete
     u1:($Drink==True) Your order is complete
 
+
 # Proposals
 proposal: Here are the categories %showTablet2Anim $Drink=False
 proposal: %sameCategory Do you want something else from this category?
     u1:(~yes) Ok, what else do you want to order?
     u1:(~no) Fine, then I'll bring you the previous menu %goToMenu
 
+
+concept:(select) [see look select go check enter show change switch]
+
+u:({I} {~want} {to} {~select} {to} ~category) Sure, here it is
