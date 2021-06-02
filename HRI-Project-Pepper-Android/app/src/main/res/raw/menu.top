@@ -14,10 +14,10 @@ concept:(toast) [toast toasts] $Food=Toast
 concept:(pizza) [pizza pizzas] $Food=Pizza
 
 concept:(fries) [fries] $Food=Fries
-concept:(onion) ["onion rings"] $Food=Onion rings
+concept:(onion) ["onion rings"] $Food="Onion rings"
 concept:(mozzarella) ["mozzarella sticks"] $Food=Mozzarella
 concept:(nuggets) [nuggets] $Food=Nuggets
-concept:(wings) ["chicken wings"] $Food=Chicken wings
+concept:(wings) ["chicken wings"] $Food="Chicken wings"
 concept:(salad) [salad salads] $Food=Salad
 
 concept:(coke) [coke cokes] $Food=Coke $Drink=True
@@ -31,7 +31,7 @@ concept:(cake) [cake cakes] $Food=Cake
 concept:(donut) [donut donuts] $Food=Donut
 concept:(milkshake) [milkshake milkshakes] $Food=Milkshake
 concept:(crepes) [crepe crepes] $Food=Crepes
-concept:(ice) ["ice cream" "ice creams"] $Food=Ice cream
+concept:(ice) ["ice cream" "ice creams"] $Food="Ice cream"
 concept:(pancake) [pancake pancakes] $Food=Pancake
 
 concept:(food) [~hamburger ~taco ~wrap ~chicken ~toast ~pizza

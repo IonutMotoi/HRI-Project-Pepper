@@ -153,10 +153,10 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         if (menuBookmarkStatus != null) {menuBookmarkStatus.removeAllOnReachedListeners();}
         if (addItemBookmarkStatus != null) {addItemBookmarkStatus.removeAllOnReachedListeners();}
         if (goToMenuBookmarkStatus != null) {goToMenuBookmarkStatus.removeAllOnReachedListeners();}
-        if (goToMenuBookmarkStatus != null) {goToMenuBookmarkStatus.removeAllOnReachedListeners();}
-        if (goToMenuBookmarkStatus != null) {goToMenuBookmarkStatus.removeAllOnReachedListeners();}
-        if (goToMenuBookmarkStatus != null) {goToMenuBookmarkStatus.removeAllOnReachedListeners();}
-        if (goToMenuBookmarkStatus != null) {goToMenuBookmarkStatus.removeAllOnReachedListeners();}
+        if (goToMainsBookmarkStatus != null) {goToMainsBookmarkStatus.removeAllOnReachedListeners();}
+        if (goToSidesBookmarkStatus != null) {goToSidesBookmarkStatus.removeAllOnReachedListeners();}
+        if (goToBeveragesBookmarkStatus != null) {goToBeveragesBookmarkStatus.removeAllOnReachedListeners();}
+        if (goToDessertsBookmarkStatus != null) {goToDessertsBookmarkStatus.removeAllOnReachedListeners();}
     }
 
     @Override
