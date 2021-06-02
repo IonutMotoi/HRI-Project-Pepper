@@ -1,5 +1,8 @@
 topic: ~menu()
-
+# TODO Add more phrases alternatives
+# TODO Set the view for each food
+# TODO Add more animations
+# TODO Fix drink not ordered at checkout
 # Concepts
 concept:(want) [want "would like" "'d like" wish]
 concept:(number) [one two three four five six seven eight nine ten]
@@ -63,7 +66,17 @@ u:({I} {~want} {to} {~select} {the} ~beverages {~category} {please}) Here are th
 u:({I} {~want} {to} {~select} {the} ~desserts {~category} {please}) Here are the desserts. %goToDesserts $View=Desserts
 u:({I} {~want} {to} {~select} {the} ~category) Which category do you want to see? %questionRightHand1Anim
 
+# Next category
+u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Mains) Here are the sides. %goToSides $View=Sides
+u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Sides) Here are the beverages. %goToBeverages $View=Beverages
+u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Beverages) Here are the desserts. %goToDesserts $View=Desserts
+u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Desserts) Here is your order. %goToMenu $View=Menu
 
+# Previous category
+u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Sides) Here are the mains. %goToMains $View=Mains
+u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Beverages) Here are the sides. %goToSides $View=Sides
+u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Desserts) Here are the beverages. %goToBeverages $View=Beverages
+u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Menu) Here is your desserts. %goToDesserts $View=Desserts
 
 # Proposals
 proposal: Would you like me to guide you through the menu? $Drink=False
@@ -83,10 +96,11 @@ proposal: %sameCategory Do you want something else from this category?
     u1:(~no) Fine, then I'll bring you the previous menu. %goToMenu %raiseLeftHand1Anim
     u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
 
-proposal: %checkout You haven't added a drink to your order. Do you want to add one? $Drink==False %questionRightHand1Anim
+proposal: %checkout Your order is complete $Drink==True %raiseLeftHand1Anim
+proposal: %checkout You haven't added a drink to your order. Do you want to add one? $Drink==False $GuidedOrdering=False %questionRightHand1Anim
     u1:(~yes) What drink do you want? %goToBeverages
     u1:(~no) Your order is complete. %raiseLeftHand1Anim
     u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
-proposal: %checkout Your order is complete $Drink==True %raiseLeftHand1Anim
+
 
 
