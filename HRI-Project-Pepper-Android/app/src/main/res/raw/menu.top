@@ -4,7 +4,7 @@ topic: ~menu()
 concept:(want) [want "would like" "'d like" wish]
 concept:(number) [one two three four five six seven eight nine ten]
 concept:(propose) ["Can I suggest you" "May I ask you" "Would you like"]
-concept:(select) [see "look at" select "go to" check enter "show me" "change to" "switch to"]
+concept:(select) [see "look at" select "go to" check enter "show me" "change to" "switch to" order]
 
 concept:(hamburger) [hamburger hamburgers] $Food=Hamburger
 concept:(taco) [taco tacos] $Food=Taco
@@ -53,20 +53,21 @@ u:({I} {~want} {[some "a portion of" "a serving of"]} ~someFood {please}) Sure! 
 u:({I} {~want} {[a an "a slice of" "a portion of" "a serving of"]} ~food {please}) Sure! I added it to your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
 u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please}) Sure! I added them to your order. $Number=$1 %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
 
-u:({I} {~want} {to} checkout {please}) Ok, this is you order. %goToMenu ^enableThenGoto(checkout)
+u:({I} {~want} {to} checkout {please}) Ok, this is your order. %goToMenu ^enableThenGoto(checkout)
 
 u:(e:Dialog/NotUnderstood) I don't understand.
 
-u:({I} {~want} {to} {~select} {the} ~mains {~category} {please}) Here are the mains. %goToMains
-u:({I} {~want} {to} {~select} {the} ~sides {~category} {please}) Here are the sides. %goToSides
-u:({I} {~want} {to} {~select} {the} ~beverages {~category} {please}) Here are the beverages. %goToBeverages
-u:({I} {~want} {to} {~select} {the} ~desserts {~category} {please}) Here are the desserts. %goToDesserts
+u:({I} {~want} {to} {~select} {the} ~mains {~category} {please}) Here are the mains. %goToMains $View=Mains
+u:({I} {~want} {to} {~select} {the} ~sides {~category} {please}) Here are the sides. %goToSides $View=Sides
+u:({I} {~want} {to} {~select} {the} ~beverages {~category} {please}) Here are the beverages. %goToBeverages $View=Beverages
+u:({I} {~want} {to} {~select} {the} ~desserts {~category} {please}) Here are the desserts. %goToDesserts $View=Desserts
 u:({I} {~want} {to} {~select} {the} ~category) Which category do you want to see? %questionRightHand1Anim
+
 
 
 # Proposals
 proposal: Would you like me to guide you through the menu? $Drink=False
-    u1:(~yes) Ok, let's start from the mains. %showTablet2Anim $GuidedOrdering=Mains ^enableThenGoto(goToMains)
+    u1:([~yes "guide {me}"]) Ok, let's start from the mains. %showTablet2Anim $GuidedOrdering=True $View=Mains ^enableThenGoto(goToMains)
     u1:(~no) Ok, feel free to choose the category. %showTablet2Anim
 
 #proposal: Here are the categories. %showTablet2Anim $Drink=False
@@ -75,10 +76,10 @@ proposal: %goToMains What do you want to order from this category?
 
 proposal: %sameCategory Do you want something else from this category?
     u1:(~yes) Ok, what else do you want to order? %questionRightHand1Anim
-    u1:($GuidedOrdering==Mains ~no) Fine, then I'll show you the sides. %goToSides $GuidedOrdering=Sides
-    u1:($GuidedOrdering==Sides ~no) Fine, then I'll show you the beverages. %goToBeverages $GuidedOrdering=Beverages
-    u1:($GuidedOrdering==Beverages ~no) Fine, then I'll show you the desserts. %goToDesserts $GuidedOrdering=Desserts
-    u1:($GuidedOrdering==Desserts ~no) Fine, then I'll show what you ordered. %goToMenu $GuidedOrdering=Menu
+    u1:($GuidedOrdering==True $View==Mains ~no) Fine, then I'll show you the sides. %goToSides $View=Sides
+    u1:($GuidedOrdering==True $View==Sides ~no) Fine, then I'll show you the beverages. %goToBeverages $View=Beverages
+    u1:($GuidedOrdering==True $View==Beverages ~no) Fine, then I'll show you the desserts. %goToDesserts $View=Desserts
+    u1:($GuidedOrdering==True $View==Desserts ~no) Fine, then I'll show what you ordered. %goToMenu $View=Menu
     u1:(~no) Fine, then I'll bring you the previous menu. %goToMenu %raiseLeftHand1Anim
     u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
 
