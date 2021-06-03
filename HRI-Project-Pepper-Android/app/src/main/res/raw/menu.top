@@ -1,41 +1,41 @@
 topic: ~menu()
 # TODO Add more phrases alternatives
-# TODO Set the view for each food
 # TODO Add more animations
 # TODO Fix drink not ordered at checkout
+
 # Concepts
 concept:(want) [want "would like" "'d like" wish]
 concept:(number) [one two three four five six seven eight nine ten]
 concept:(propose) ["Can I suggest you" "May I ask you" "Would you like"]
 concept:(select) [see "look at" select "go to" check enter "show me" "change to" "switch to" order]
 
-concept:(hamburger) [hamburger hamburgers] $Food=Hamburger
-concept:(taco) [taco tacos] $Food=Taco
-concept:(wrap) [wrap wraps] $Food=Wrap
-concept:(chicken) [chicken chickens] $Food=Chicken
-concept:(toast) [toast toasts] $Food=Toast
-concept:(pizza) [pizza pizzas] $Food=Pizza
+concept:(hamburger) [hamburger hamburgers] $Food=Hamburger $View=Mains
+concept:(taco) [taco tacos] $Food=Taco $View=Mains
+concept:(wrap) [wrap wraps] $Food=Wrap $View=Mains
+concept:(chicken) [chicken chickens] $Food=Chicken $View=Mains
+concept:(toast) [toast toasts] $Food=Toast $View=Mains
+concept:(pizza) [pizza pizzas] $Food=Pizza $View=Mains
 
-concept:(fries) [fries] $Food=Fries
-concept:(onion) ["onion rings"] $Food="Onion rings"
-concept:(mozzarella) ["mozzarella sticks"] $Food=Mozzarella
-concept:(nuggets) [nuggets] $Food=Nuggets
-concept:(wings) ["chicken wings"] $Food="Chicken wings"
-concept:(salad) [salad salads] $Food=Salad
+concept:(fries) [fries] $Food=Fries $View=Sides
+concept:(onion) ["onion rings"] $Food="Onion rings" $View=Sides
+concept:(mozzarella) ["mozzarella sticks"] $Food=Mozzarella $View=Sides
+concept:(nuggets) [nuggets] $Food=Nuggets $View=Sides
+concept:(wings) ["chicken wings"] $Food="Chicken wing $View=Sidess"
+concept:(salad) [salad salads] $Food=Salad $View=Sides
 
-concept:(coke) [coke cokes] $Food=Coke $Drink=True
-concept:(sprite) [sprite sprites] $Food=Sprite $Drink=True
-concept:(water) [water waters] $Food=Water $Drink=True
-concept:(fanta) [fanta fantas] $Food=Fanta $Drink=True
-concept:(tea) [tea teas] $Food=Tea $Drink=True
-concept:(beer) [beer beers] $Food=Beer $Drink=True
+concept:(coke) [coke cokes] $Food=Coke $Drink=True $View=Beverages
+concept:(sprite) [sprite sprites] $Food=Sprite $Drink=True $View=Beverages
+concept:(water) [water waters] $Food=Water $Drink=True $View=Beverages
+concept:(fanta) [fanta fantas] $Food=Fanta $Drink=True $View=Beverages
+concept:(tea) [tea teas] $Food=Tea $Drink=True $View=Beverages
+concept:(beer) [beer beers] $Food=Beer $Drink=True $View=Beverages
 
-concept:(cake) [cake cakes] $Food=Cake
-concept:(donut) [donut donuts] $Food=Donut
-concept:(milkshake) [milkshake milkshakes] $Food=Milkshake
-concept:(crepes) [crepe crepes] $Food=Crepes
-concept:(ice) ["ice cream" "ice creams"] $Food="Ice cream"
-concept:(pancake) [pancake pancakes] $Food=Pancake
+concept:(cake) [cake cakes] $Food=Cake $View=Desserts
+concept:(donut) [donut donuts] $Food=Donut $View=Desserts
+concept:(milkshake) [milkshake milkshakes] $Food=Milkshake $View=Desserts
+concept:(crepes) [crepe crepes] $Food=Crepes $View=Desserts
+concept:(ice) ["ice cream" "ice creams"] $Food="Ice cream" $View=Desserts
+concept:(pancake) [pancake pancakes] $Food=Pancake $View=Desserts
 
 concept:(food) [~hamburger ~taco ~wrap ~chicken ~toast ~pizza
                 ~fries ~onion ~mozzarella ~nuggets ~wings ~salad
