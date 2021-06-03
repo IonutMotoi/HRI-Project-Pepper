@@ -1,7 +1,7 @@
 topic: ~menu()
 # TODO Add more phrases alternatives
 # TODO Add more animations
-# TODO Fix drink not ordered at checkout
+# TODO add order complete view -> next client
 
 # Concepts
 concept:(want) [want "would like" "'d like" wish]
@@ -23,12 +23,12 @@ concept:(nuggets) [nuggets] $Food=Nuggets $View=Sides
 concept:(wings) ["chicken wings"] $Food="Chicken wing $View=Sidess"
 concept:(salad) [salad salads] $Food=Salad $View=Sides
 
-concept:(coke) [coke cokes] $Food=Coke $Drink=True $View=Beverages
-concept:(sprite) [sprite sprites] $Food=Sprite $Drink=True $View=Beverages
-concept:(water) [water waters] $Food=Water $Drink=True $View=Beverages
-concept:(fanta) [fanta fantas] $Food=Fanta $Drink=True $View=Beverages
-concept:(tea) [tea teas] $Food=Tea $Drink=True $View=Beverages
-concept:(beer) [beer beers] $Food=Beer $Drink=True $View=Beverages
+concept:(coke) [coke cokes] $Food=Coke $View=Beverages
+concept:(sprite) [sprite sprites] $Food=Sprite $View=Beverages
+concept:(water) [water waters] $Food=Water $View=Beverages
+concept:(fanta) [fanta fantas] $Food=Fanta $View=Beverages
+concept:(tea) [tea teas] $Food=Tea $View=Beverages
+concept:(beer) [beer beers] $Food=Beer $View=Beverages
 
 concept:(cake) [cake cakes] $Food=Cake $View=Desserts
 concept:(donut) [donut donuts] $Food=Donut $View=Desserts
@@ -56,7 +56,7 @@ u:({I} {~want} {[some "a portion of" "a serving of"]} ~someFood {please}) Sure! 
 u:({I} {~want} {[a an "a slice of" "a portion of" "a serving of"]} ~food {please}) Sure! I added it to your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
 u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please}) Sure! I added them to your order. $Number=$1 %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
 
-u:({I} {~want} {to} checkout {please}) Ok, this is your order. %goToMenu ^enableThenGoto(checkout)
+u:({I} {~want} {to} checkout {please}) Ok, this is your order. %goToMenu %checkout
 
 u:(e:Dialog/NotUnderstood) I don't understand.
 
@@ -83,9 +83,7 @@ proposal: Would you like me to guide you through the menu? $Drink=False
     u1:([~yes "guide {me}"]) Ok, let's start from the mains. %showTablet2Anim $GuidedOrdering=True $View=Mains ^enableThenGoto(goToMains)
     u1:(~no) Ok, feel free to choose the category. %showTablet2Anim
 
-#proposal: Here are the categories. %showTablet2Anim $Drink=False
 proposal: %goToMains What do you want to order from this category?
-
 
 proposal: %sameCategory Do you want something else from this category?
     u1:(~yes) Ok, what else do you want to order? %questionRightHand1Anim
@@ -96,11 +94,24 @@ proposal: %sameCategory Do you want something else from this category?
     u1:(~no) Fine, then I'll bring you the previous menu. %goToMenu %raiseLeftHand1Anim
     u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
 
-proposal: %checkout Your order is complete $Drink==True %raiseLeftHand1Anim
-proposal: %checkout You haven't added a drink to your order. Do you want to add one? $Drink==False $GuidedOrdering=False %questionRightHand1Anim
-    u1:(~yes) What drink do you want? %goToBeverages
+proposal: %noPrompt Your order is complete %raiseLeftHand1Anim
+
+proposal: %promptMains You haven't added a main to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
+    u1:(~yes) What main do you want? %goToMains $View=Mains
     u1:(~no) Your order is complete. %raiseLeftHand1Anim
     u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
 
+proposal: %promptSides You haven't added a side to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
+    u1:(~yes) What side do you want? %goToSides $View=Sides
+    u1:(~no) Your order is complete. %raiseLeftHand1Anim
+    u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
 
+proposal: %promptBeverages You haven't added a drink to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
+    u1:(~yes) What drink do you want? %goToBeverages $View=Beverages
+    u1:(~no) Your order is complete. %raiseLeftHand1Anim
+    u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
 
+proposal: %promptDesserts You haven't added a dessert to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
+    u1:(~yes) What dessert do you want? %goToDesserts $View=Desserts
+    u1:(~no) Your order is complete. %raiseLeftHand1Anim
+    u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope

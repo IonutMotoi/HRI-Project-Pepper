@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.util.Log;
+
 public class Order {
 
     public FoodItem [] list = {
@@ -63,6 +65,48 @@ public class Order {
             }
         }
         return new FoodItem("null", 0, 0);
+    }
+
+    public String getMissingCategory() {
+        String missingCategory = "Mains";
+
+        // Mains
+        int i=0;
+        for (; i<6; ++i) {
+            if (list[i].number > 0) {
+                missingCategory = "Sides";
+                break;
+            }
+        }
+        if (missingCategory.equals("Mains")) return missingCategory;
+
+        // Sides
+        for (i=6; i<12; ++i) {
+            if (list[i].number > 0) {
+                missingCategory = "Beverages";
+                break;
+            }
+        }
+        if (missingCategory.equals("Sides")) return missingCategory;
+
+        // Beverages
+        for (i=12; i<18; ++i) {
+            if (list[i].number > 0) {
+                missingCategory = "Desserts";
+                break;
+            }
+        }
+        if (missingCategory.equals("Beverages")) return missingCategory;
+
+        // Desserts
+        for (i=18; i<24; ++i) {
+            if (list[i].number > 0) {
+                missingCategory = "Null";
+                break;
+            }
+        }
+
+        return missingCategory;
     }
 }
 

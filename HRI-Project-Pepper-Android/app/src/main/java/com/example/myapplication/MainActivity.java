@@ -22,6 +22,8 @@ import com.aldebaran.qi.sdk.builder.TopicBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.object.actuation.Animate;
 import com.aldebaran.qi.sdk.object.actuation.Animation;
+import com.aldebaran.qi.sdk.object.conversation.AutonomousReactionImportance;
+import com.aldebaran.qi.sdk.object.conversation.AutonomousReactionValidity;
 import com.aldebaran.qi.sdk.object.conversation.Bookmark;
 import com.aldebaran.qi.sdk.object.conversation.BookmarkStatus;
 import com.aldebaran.qi.sdk.object.conversation.Chat;
@@ -63,6 +65,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     private BookmarkStatus goToSidesBookmarkStatus;
     private BookmarkStatus goToBeveragesBookmarkStatus;
     private BookmarkStatus goToDessertsBookmarkStatus;
+    private BookmarkStatus checkoutBookmarkStatus;
 
     // Chat topics
     private Topic topicGreetings;
@@ -157,6 +160,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         if (goToSidesBookmarkStatus != null) {goToSidesBookmarkStatus.removeAllOnReachedListeners();}
         if (goToBeveragesBookmarkStatus != null) {goToBeveragesBookmarkStatus.removeAllOnReachedListeners();}
         if (goToDessertsBookmarkStatus != null) {goToDessertsBookmarkStatus.removeAllOnReachedListeners();}
+        if (checkoutBookmarkStatus != null) {checkoutBookmarkStatus.removeAllOnReachedListeners();}
     }
 
     @Override
@@ -231,6 +235,13 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         Bookmark goToSidesBookmark = bookmarksMenu.get("goToSides");
         Bookmark goToBeveragesBookmark = bookmarksMenu.get("goToBeverages");
         Bookmark goToDessertsBookmark = bookmarksMenu.get("goToDesserts");
+        Bookmark checkoutBookmark = bookmarksMenu.get("checkout");
+        Bookmark promptMainsBookmark = bookmarksMenu.get("promptMains");
+        Bookmark promptSidesBookmark = bookmarksMenu.get("promptSides");
+        Bookmark promptBeveragesBookmark = bookmarksMenu.get("promptBeverages");
+        Bookmark promptDessertsBookmark = bookmarksMenu.get("promptDesserts");
+        Bookmark noPromptBookmark = bookmarksMenu.get("noPrompt");
+
 
         // Create a BookmarkStatus for each bookmark
         menuBookmarkStatus = qiChatbot.bookmarkStatus(menuBookmark);
@@ -240,6 +251,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         goToSidesBookmarkStatus = qiChatbot.bookmarkStatus(goToSidesBookmark);
         goToBeveragesBookmarkStatus = qiChatbot.bookmarkStatus(goToBeveragesBookmark);
         goToDessertsBookmarkStatus = qiChatbot.bookmarkStatus(goToDessertsBookmark);
+        checkoutBookmarkStatus = qiChatbot.bookmarkStatus(checkoutBookmark);
 
         menuBookmarkStatus.addOnReachedListener(this::initMenuView);
 
@@ -261,6 +273,71 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         goToSidesBookmarkStatus.addOnReachedListener(this::initSidesView);
         goToBeveragesBookmarkStatus.addOnReachedListener(this::initBeveragesView);
         goToDessertsBookmarkStatus.addOnReachedListener(this::initDessertsView);
+
+        final Boolean[] prompt = {true};
+        checkoutBookmarkStatus.addOnReachedListener(() -> {
+            if(prompt[0]) {
+                String missingCategory = order.getMissingCategory();
+                switch (missingCategory) {
+                    case "Mains":
+                        Log.i("Prompt", "Mains");
+                        // Prompt mains
+                        qiChatbot.goToBookmark(
+                                promptMainsBookmark,
+                                AutonomousReactionImportance.HIGH,
+                                AutonomousReactionValidity.IMMEDIATE);
+                        // Deactivate other future prompts
+                        prompt[0] = false;
+                        break;
+                    case "Sides":
+                        // Prompt sides
+                        Log.i("Prompt", "Sides");
+                        qiChatbot.goToBookmark(
+                                promptSidesBookmark,
+                                AutonomousReactionImportance.HIGH,
+                                AutonomousReactionValidity.IMMEDIATE);
+                        // Deactivate other future prompts
+                        prompt[0] = false;
+                        break;
+                    case "Beverages":
+                        // Prompt beverages
+                        Log.i("Prompt", "Beverages");
+                        qiChatbot.goToBookmark(
+                                promptBeveragesBookmark,
+                                AutonomousReactionImportance.HIGH,
+                                AutonomousReactionValidity.IMMEDIATE);
+                        // Deactivate other future prompts
+                        prompt[0] = false;
+                        break;
+                    case "Desserts":
+                        // Prompt desserts
+                        Log.i("Prompt", "Desserts");
+                        qiChatbot.goToBookmark(
+                                promptDessertsBookmark,
+                                AutonomousReactionImportance.HIGH,
+                                AutonomousReactionValidity.IMMEDIATE);
+                        // Deactivate other future prompts
+                        prompt[0] = false;
+                        break;
+                    default:
+                        // No prompt
+                        Log.i("Prompt", "Null");
+                        qiChatbot.goToBookmark(
+                                noPromptBookmark,
+                                AutonomousReactionImportance.HIGH,
+                                AutonomousReactionValidity.IMMEDIATE);
+                        break;
+                }
+            }
+            else {
+                // No prompt
+                Log.i("Prompt", "Null");
+                qiChatbot.goToBookmark(
+                        noPromptBookmark,
+                        AutonomousReactionImportance.HIGH,
+                        AutonomousReactionValidity.IMMEDIATE);
+            }
+        });
     }
 
     public void initAnimations() {
@@ -787,15 +864,25 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
 
     public int numberStringToInt(String str) {
         switch (str) {
+            case "1":
             case "one": return 1;
+            case "2":
             case "two": return 2;
+            case "3":
             case "three": return 3;
+            case "4":
             case "four": return 4;
+            case "5":
             case "five": return 5;
+            case "6":
             case "six": return 6;
+            case "7":
             case "seven": return 7;
+            case "8":
             case "eight": return 8;
+            case "9":
             case "nine": return 9;
+            case "10":
             case "ten": return 10;
             default: return 0;
         }
