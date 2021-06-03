@@ -29,7 +29,7 @@ concept:(nuggets) [nuggets] $Food=Nuggets $View=Sides
 concept:(wings) ["chicken wings"] $Food="Chicken wing $View=Sidess"
 concept:(salad) [salad salads] $Food=Salad $View=Sides
 
-concept:(coke) [coke cokes] $Food=Coke $View=Beverages
+concept:(coke) [coke cokes cola] $Food=Coke $View=Beverages
 concept:(sprite) [sprite sprites] $Food=Sprite $View=Beverages
 concept:(water) [water waters] $Food=Water $View=Beverages
 concept:(fanta) [fanta fantas] $Food=Fanta $View=Beverages
