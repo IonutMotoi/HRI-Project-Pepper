@@ -1,8 +1,8 @@
 topic: ~menu()
 # TODO Add more phrases alternatives
-# TODO Set the view for each food
 # TODO Add more animations
-# TODO Fix drink not ordered at checkout
+# TODO add order complete view -> next client
+
 # Concepts
 concept:(want) [want "would like" "'d like" wish]
 concept:(number) [one two three four five six seven eight nine ten 1 2 3 4 5 6 7 8 9 10]
@@ -15,33 +15,33 @@ concept:(show) ^rand["Here are" "I'll show you" "These are" "I'll display you"]
 concept:(request) ^rand["Do you want" "Do you wish to order" "Would you like to order"]
 concept:(incomprehension) ^rand["I don't understand." "Sorry I can't understand what you said." "Can you repeat please?"]
 
-concept:(hamburger) [hamburger hamburgers] $Food=Hamburger
-concept:(taco) [taco tacos] $Food=Taco
-concept:(wrap) [wrap wraps] $Food=Wrap
-concept:(chicken) [chicken chickens] $Food=Chicken
-concept:(toast) [toast toasts] $Food=Toast
-concept:(pizza) [pizza pizzas] $Food=Pizza
+concept:(hamburger) [hamburger hamburgers] $Food=Hamburger $View=Mains
+concept:(taco) [taco tacos] $Food=Taco $View=Mains
+concept:(wrap) [wrap wraps] $Food=Wrap $View=Mains
+concept:(chicken) [chicken chickens] $Food=Chicken $View=Mains
+concept:(toast) [toast toasts] $Food=Toast $View=Mains
+concept:(pizza) [pizza pizzas] $Food=Pizza $View=Mains
 
-concept:(fries) [fries] $Food=Fries
-concept:(onion) ["onion rings"] $Food="Onion rings"
-concept:(mozzarella) ["mozzarella sticks"] $Food=Mozzarella
-concept:(nuggets) [nuggets] $Food=Nuggets
-concept:(wings) ["chicken wings"] $Food="Chicken wings"
-concept:(salad) [salad salads] $Food=Salad
+concept:(fries) [fries] $Food=Fries $View=Sides
+concept:(onion) ["onion rings"] $Food="Onion rings" $View=Sides
+concept:(mozzarella) ["mozzarella sticks"] $Food=Mozzarella $View=Sides
+concept:(nuggets) [nuggets] $Food=Nuggets $View=Sides
+concept:(wings) ["chicken wings"] $Food="Chicken wing $View=Sidess"
+concept:(salad) [salad salads] $Food=Salad $View=Sides
 
-concept:(coke) [coke cokes cola] $Food=Coke $Drink=True
-concept:(sprite) [sprite sprites] $Food=Sprite $Drink=True
-concept:(water) [water waters] $Food=Water $Drink=True
-concept:(fanta) [fanta fantas] $Food=Fanta $Drink=True
-concept:(tea) [tea teas] $Food=Tea $Drink=True
-concept:(beer) [beer beers] $Food=Beer $Drink=True
+concept:(coke) [coke cokes] $Food=Coke $View=Beverages
+concept:(sprite) [sprite sprites] $Food=Sprite $View=Beverages
+concept:(water) [water waters] $Food=Water $View=Beverages
+concept:(fanta) [fanta fantas] $Food=Fanta $View=Beverages
+concept:(tea) [tea teas] $Food=Tea $View=Beverages
+concept:(beer) [beer beers] $Food=Beer $View=Beverages
 
-concept:(cake) [cake cakes] $Food=Cake
-concept:(donut) [donut donuts] $Food=Donut
-concept:(milkshake) [milkshake milkshakes] $Food=Milkshake
-concept:(crepes) [crepe crepes] $Food=Crepes
-concept:(ice) ["ice cream" "ice creams"] $Food="Ice cream"
-concept:(pancake) [pancake pancakes] $Food=Pancake
+concept:(cake) [cake cakes] $Food=Cake $View=Desserts
+concept:(donut) [donut donuts] $Food=Donut $View=Desserts
+concept:(milkshake) [milkshake milkshakes] $Food=Milkshake $View=Desserts
+concept:(crepes) [crepe crepes] $Food=Crepes $View=Desserts
+concept:(ice) ["ice cream" "ice creams"] $Food="Ice cream" $View=Desserts
+concept:(pancake) [pancake pancakes] $Food=Pancake $View=Desserts
 
 concept:(food) [~hamburger ~taco ~wrap ~chicken ~toast ~pizza
                 ~fries ~onion ~mozzarella ~nuggets ~wings ~salad
@@ -62,7 +62,7 @@ u:({I} {~want} {[some "a portion of" "a serving of"]} ~someFood {please})  ~conf
 u:({I} {~want} {[a an "a slice of" "a portion of" "a serving of"]} ~food {please}) ~confirm! I ~add it to your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
 u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please})~confirm I ~add! them to your order. $Number=$1 %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
 
-u:({I} {~want} {to} checkout {please}) ~confirm, ^rand["This is" "Here is" "I'll show"] your order. %goToMenu ^enableThenGoto(checkout)
+u:({I} {~want} {to} checkout {please}) ~confirm, ^rand["This is" "Here is" "I'll show"] your order. %goToMenu %checkout
 
 u:(e:Dialog/NotUnderstood) ~incomprehension
 
@@ -102,11 +102,24 @@ proposal: %sameCategory ~request something else from this category?
     u1:(~no) ~acknowledge, then I'll ^rand[bring show display] you the previous menu. %goToMenu %raiseLeftHand1Anim
     u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope
 
-proposal: %checkout Your order is complete $Drink==True %raiseLeftHand1Anim
-proposal: %checkout You haven't added a drink to your order. Do you want to add one? $Drink==False $GuidedOrdering=False %questionRightHand1Anim
-    u1:(~yes) What drink do you ^rand[want wish]? %goToBeverages
+proposal: %noPrompt Your order is complete %raiseLeftHand1Anim
+
+proposal: %promptMains You haven't added a main to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
+    u1:(~yes) What main do you want? %goToMains $View=Mains
     u1:(~no) Your order is complete. %raiseLeftHand1Anim
     u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope
 
+proposal: %promptSides You haven't added a side to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
+    u1:(~yes) What side do you want? %goToSides $View=Sides
+    u1:(~no) Your order is complete. %raiseLeftHand1Anim
+    u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
 
+proposal: %promptBeverages You haven't added a drink to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
+    u1:(~yes) What drink do you want? %goToBeverages $View=Beverages
+    u1:(~no) Your order is complete. %raiseLeftHand1Anim
+    u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
 
+proposal: %promptDesserts You haven't added a dessert to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
+    u1:(~yes) What dessert do you want? %goToDesserts $View=Desserts
+    u1:(~no) Your order is complete. %raiseLeftHand1Anim
+    u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
