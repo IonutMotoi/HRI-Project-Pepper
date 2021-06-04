@@ -1,7 +1,8 @@
 topic: ~menu()
-# TODO Add more phrases alternatives
-# TODO Add more animations
-# TODO add order complete view -> next client
+# TODO Check grammar
+# TODO Ask user for name (Starbucks-like)
+# TODO Give indications to where collect the order
+# TODO Answer questions about the food
 
 # Concepts
 concept:(want) [want "would like" "'d like" wish]
@@ -43,11 +44,12 @@ concept:(crepes) [crepe crepes] $Food=Crepes $View=Desserts
 concept:(ice) ["ice cream" "ice creams"] $Food="Ice cream" $View=Desserts
 concept:(pancake) [pancake pancakes] $Food=Pancake $View=Desserts
 
-concept:(food) [~hamburger ~taco ~wrap ~chicken ~toast ~pizza
-                ~fries ~onion ~mozzarella ~nuggets ~wings ~salad
-                ~coke ~sprite ~water ~fanta ~tea ~beer
-                ~cake ~donut ~milkshake ~crepes ~ice ~pancake]
-concept:(someFood) [~fries ~onion ~mozzarella ~nuggets ~wings]
+concept:(foodThem) [~fries ~onion ~mozzarella ~nuggets ~wings]
+concept:(foodIt) [~hamburger ~taco ~wrap ~chicken ~toast ~pizza
+                  ~salad
+                  ~coke ~sprite ~water ~fanta ~tea ~beer
+                  ~cake ~donut ~milkshake ~crepes ~ice ~pancake]
+concept:(food) [~foodThem ~foodIt]
 
 concept:(mains) [mains]
 concept:(sides) [sides]
@@ -58,9 +60,9 @@ concept:(checkout) [checkout "check out"]
 
 
 # Rules
-u:({I} {~want} {[some "a portion of" "a serving of"]} ~someFood {please})  ~confirm! I ~add them to your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
-u:({I} {~want} {[a an "a slice of" "a portion of" "a serving of"]} ~food {please}) ~confirm! I ~add it to your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
-u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please})~confirm I ~add! them to your order. $Number=$1 %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
+u:({I} {~want} {[some "a portion of" "a serving of"]} ~foodThem {please})  ~confirm! I ^rand["added them to" "^rand[put placed] them in"] your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
+u:({I} {~want} {[a an "a slice of" "a portion of" "a serving of"]} ~foodIt {please}) ~confirm! I ^rand["added it to" "^rand[put placed] it in"] your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
+u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please})~confirm I ^rand["added them to" "^rand[put placed] them in"] your order. $Number=$1 %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
 
 u:({I} {~want} {to} checkout {please}) ~confirm, ^rand["This is" "Here is" "I'll show"] your order. %goToMenu %checkout %showTablet2Anim
 
@@ -77,6 +79,11 @@ u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $V
 u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Sides) ~show the beverages. %goToBeverages $View=Beverages %showTablet6Anim
 u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Beverages) ~show the desserts. %goToDesserts $View=Desserts %showTablet4Anim
 u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Desserts) ^rand["This is" "Here is" "I'll show"] your order. %goToMenu $View=Menu %showTablet3Anim
+
+u:([nothing "I don't want anything"] {"from here"} $View==Mains) ~show the sides. %goToSides $View=Sides %showTablet2Anim
+u:([nothing "I don't want anything"] {"from here"} $View==Sides) ~show the beverages. %goToBeverages $View=Beverages %showTablet6Anim
+u:([nothing "I don't want anything"] {"from here"} $View==Beverages) ~show the desserts. %goToDesserts $View=Desserts %showTablet4Anim
+u:([nothing "I don't want anything"] {"from here"} $View==Desserts) ^rand["This is" "Here is" "I'll show"] your order. %goToMenu $View=Menu %showTablet3Anim
 
 # Previous category
 u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Sides) ~show the mains. %goToMains $View=Mains %showTablet6Anim
