@@ -105,21 +105,21 @@ proposal: %sameCategory ~request something else from this category?
 proposal: %noPrompt Your order is complete %raiseLeftHand1Anim
 
 proposal: %promptMains You haven't added a main to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
-    u1:(~yes) What main do you want? %goToMains $View=Mains
+    u1:(~yes) What main do you ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]? %goToMains $View=Mains
     u1:(~no) Your order is complete. %raiseLeftHand1Anim
     u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope
 
 proposal: %promptSides You haven't added a side to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
-    u1:(~yes) What side do you want? %goToSides $View=Sides
+    u1:(~yes) What side do you ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]? %goToSides $View=Sides
     u1:(~no) Your order is complete. %raiseLeftHand1Anim
-    u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
+    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope
 
 proposal: %promptBeverages You haven't added a drink to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
-    u1:(~yes) What drink do you want? %goToBeverages $View=Beverages
+    u1:(~yes) What drink do you ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]? %goToBeverages $View=Beverages
     u1:(~no) Your order is complete. %raiseLeftHand1Anim
-    u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
+    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope
 
 proposal: %promptDesserts You haven't added a dessert to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
-    u1:(~yes) What dessert do you want? %goToDesserts $View=Desserts
+    u1:(~yes) What dessert ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]?%goToDesserts $View=Desserts
     u1:(~no) Your order is complete. %raiseLeftHand1Anim
-    u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
+    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope
