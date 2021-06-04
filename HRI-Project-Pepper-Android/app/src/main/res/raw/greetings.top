@@ -12,10 +12,10 @@ concept:(incomprehension) ^rand["I don't understand." "Sorry I can't understand 
 # Rules
 u:(~hello) ~hello %hello10Anim ^nextProposal
 u:(~ordering) Sure! $Start=true ^topic(menu) %menu
-u:(e:Dialog/NotUnderstood) ~incomprehension %negationBothHands4Anim
+u:(e:Dialog/NotUnderstood) ~incomprehension %negationBothHands4GAnim
 
 # Proposals
 proposal: ~order-ask
   u1:(~yes) Great. $Start=true ^topic(menu) %menu
   u1:(~no) Oh. I am sorry. Let me know if I can help you.
-  u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim
+  u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4GAnim
