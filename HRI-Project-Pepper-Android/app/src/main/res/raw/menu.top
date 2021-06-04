@@ -62,30 +62,30 @@ u:({I} {~want} {[some "a portion of" "a serving of"]} ~someFood {please})  ~conf
 u:({I} {~want} {[a an "a slice of" "a portion of" "a serving of"]} ~food {please}) ~confirm! I ~add it to your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
 u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please})~confirm I ~add! them to your order. $Number=$1 %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
 
-u:({I} {~want} {to} checkout {please}) ~confirm, ^rand["This is" "Here is" "I'll show"] your order. %goToMenu %checkout
+u:({I} {~want} {to} checkout {please}) ~confirm, ^rand["This is" "Here is" "I'll show"] your order. %goToMenu %checkout %showTablet2Anim
 
-u:(e:Dialog/NotUnderstood) ~incomprehension
+u:(e:Dialog/NotUnderstood) ~incomprehension %negationBothHands4Anim
 
-u:({I} {~want} {to} {~select} {the} ~mains {~category} {please}) ~show the mains. %goToMains $View=Mains
-u:({I} {~want} {to} {~select} {the} ~sides {~category} {please}) ~show  the sides. %goToSides $View=Sides
-u:({I} {~want} {to} {~select} {the} ~beverages {~category} {please}) ~show  the beverages. %goToBeverages $View=Beverages
-u:({I} {~want} {to} {~select} {the} ~desserts {~category} {please}) ~show  the desserts. %goToDesserts $View=Desserts
+u:({I} {~want} {to} {~select} {the} ~mains {~category} {please}) ~show the mains. %goToMains $View=Mains %showTablet6Anim
+u:({I} {~want} {to} {~select} {the} ~sides {~category} {please}) ~show  the sides. %goToSides $View=Sides %showTablet4Anim
+u:({I} {~want} {to} {~select} {the} ~beverages {~category} {please}) ~show  the beverages. %goToBeverages $View=Beverages %showTablet3Anim
+u:({I} {~want} {to} {~select} {the} ~desserts {~category} {please}) ~show  the desserts. %goToDesserts $View=Desserts %showTablet2Anim
 u:({I} {~want} {to} {~select} {the} ~category) Which category do you want ^rand["to see?" "I ^rand[show display] you?" "to select?"] %questionRightHand1Anim
 
 # Next category
-u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Mains) ~show the sides. %goToSides $View=Sides
-u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Sides) ~show the beverages. %goToBeverages $View=Beverages
-u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Beverages) ~show the desserts. %goToDesserts $View=Desserts
-u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Desserts) ^rand["This is" "Here is" "I'll show"] your order. %goToMenu $View=Menu
+u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Mains) ~show the sides. %goToSides $View=Sides %showTablet2Anim
+u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Sides) ~show the beverages. %goToBeverages $View=Beverages %showTablet6Anim
+u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Beverages) ~show the desserts. %goToDesserts $View=Desserts %showTablet4Anim
+u:({[can could would]} {you} {go to the} next {[category menu view]} {please} $View==Desserts) ^rand["This is" "Here is" "I'll show"] your order. %goToMenu $View=Menu %showTablet3Anim
 
 # Previous category
-u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Sides) ~show the mains. %goToMains $View=Mains
-u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Beverages) ~show the sides. %goToSides $View=Sides
-u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Desserts) ~show the beverages. %goToBeverages $View=Beverages
-u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Menu) ~show your desserts. %goToDesserts $View=Desserts
+u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Sides) ~show the mains. %goToMains $View=Mains %showTablet6Anim
+u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Beverages) ~show the sides. %goToSides $View=Sides %showTablet4Anim
+u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Desserts) ~show the beverages. %goToBeverages $View=Beverages %showTablet2Anim
+u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Menu) ~show your desserts. %goToDesserts $View=Desserts %showTablet3Anim
 
 # Proposals
-proposal: Would you like me to guide you through the menu? $Drink=False
+proposal: Would you like me to guide you through the menu? $Drink=False %questionBothHands1Anim
     u1:([~yes "guide {me}"]) ~acknowledge, let's start from the mains. %showTablet2Anim $GuidedOrdering=True $View=Mains ^enableThenGoto(goToMains)
     u1:(~no) ~acknowledge, feel free to choose the category. %showTablet2Anim
 
@@ -95,31 +95,31 @@ proposal: %goToMains What do you ^rand[want wish] to order from this category?
 
 proposal: %sameCategory ~request something else from this category?
     u1:(~yes) ~confirm, what else do you ^rand[want wish] to ^rand["order?" "add to your order?" "place into your order?"] %questionRightHand1Anim
-    u1:($GuidedOrdering==True $View==Mains ~no) ~acknowledge, ~show the sides. %goToSides $View=Sides
-    u1:($GuidedOrdering==True $View==Sides ~no) ~acknowledge, ~show the beverages. %goToBeverages $View=Beverages
-    u1:($GuidedOrdering==True $View==Beverages ~no) ~acknowledge, ~show the desserts. %goToDesserts $View=Desserts
-    u1:($GuidedOrdering==True $View==Desserts ~no) ~acknowledge, then I'll ^rand[show display] what you ordered. %goToMenu $View=Menu
-    u1:(~no) ~acknowledge, then I'll ^rand[bring show display] you the previous menu. %goToMenu %raiseLeftHand1Anim
-    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope
+    u1:($GuidedOrdering==True $View==Mains ~no) ~acknowledge, ~show the sides. %goToSides $View=Sides %showTablet3Anim
+    u1:($GuidedOrdering==True $View==Sides ~no) ~acknowledge, ~show the beverages. %goToBeverages $View=Beverages %showTablet4Anim
+    u1:($GuidedOrdering==True $View==Beverages ~no) ~acknowledge, ~show the desserts. %goToDesserts $View=Desserts %showTablet6Anim
+    u1:($GuidedOrdering==True $View==Desserts ~no) ~acknowledge, then I'll ^rand[show display] what you ordered. %goToMenu $View=Menu %showTablet2Anim
+    u1:(~no) ~acknowledge, then I'll ^rand[bring show display] you the previous menu. %goToMenu %raiseLeftHand1Anim %showTablet2Anim
+    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim
 
 proposal: %noPrompt Your order is complete %raiseLeftHand1Anim
 
 proposal: %promptMains You haven't added a main to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
-    u1:(~yes) What main do you ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]? %goToMains $View=Mains
+    u1:(~yes) What main do you ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]? %goToMains $View=Mains %showTablet4Anim
     u1:(~no) Your order is complete. %raiseLeftHand1Anim
-    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope
+    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim
 
 proposal: %promptSides You haven't added a side to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
-    u1:(~yes) What side do you ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]? %goToSides $View=Sides
+    u1:(~yes) What side do you ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]? %goToSides $View=Sides %showTablet6Anim
     u1:(~no) Your order is complete. %raiseLeftHand1Anim
-    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope
+    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim
 
 proposal: %promptBeverages You haven't added a drink to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
-    u1:(~yes) What drink do you ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]? %goToBeverages $View=Beverages
+    u1:(~yes) What drink do you ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]? %goToBeverages $View=Beverages %showTablet3Anim
     u1:(~no) Your order is complete. %raiseLeftHand1Anim
-    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope
+    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim
 
 proposal: %promptDesserts You haven't added a dessert to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
-    u1:(~yes) What dessert ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]?%goToDesserts $View=Desserts
+    u1:(~yes) What dessert ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]?%goToDesserts $View=Desserts %showTablet2Anim
     u1:(~no) Your order is complete. %raiseLeftHand1Anim
-    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope
+    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim

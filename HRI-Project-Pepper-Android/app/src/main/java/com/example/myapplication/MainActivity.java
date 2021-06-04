@@ -346,6 +346,21 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         BookmarkStatus showTablet2AnimBookmarkStatus = qiChatbot.bookmarkStatus(showTablet2AnimBookmark);
         showTablet2AnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.show_tablet_a002, qiContext));
 
+        // Show tablet 3
+        Bookmark showTablet3AnimBookmark = bookmarksMenu.get("showTablet3Anim");
+        BookmarkStatus showTablet3AnimBookmarkStatus = qiChatbot.bookmarkStatus(showTablet3AnimBookmark);
+        showTablet3AnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.show_tablet_a003, qiContext));
+
+        // Show tablet 4
+        Bookmark showTablet4AnimBookmark = bookmarksMenu.get("showTablet4Anim");
+        BookmarkStatus showTablet4AnimBookmarkStatus = qiChatbot.bookmarkStatus(showTablet4AnimBookmark);
+        showTablet4AnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.show_tablet_a004, qiContext));
+
+        // Show tablet 6
+        Bookmark showTablet6AnimBookmark = bookmarksMenu.get("showTablet6Anim");
+        BookmarkStatus showTablet6AnimBookmarkStatus = qiChatbot.bookmarkStatus(showTablet6AnimBookmark);
+        showTablet6AnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.show_tablet_a006, qiContext));
+
         // Hello 10
         Bookmark hello10AnimBookmark = bookmarksGreetings.get("hello10Anim");
         BookmarkStatus hello10AnimBookmarkStatus = qiChatbot.bookmarkStatus(hello10AnimBookmark);
@@ -360,6 +375,16 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         Bookmark questionRightHand1AnimBookmark = bookmarksMenu.get("questionRightHand1Anim");
         BookmarkStatus questionRightHand1AnimBookmarkStatus = qiChatbot.bookmarkStatus(questionRightHand1AnimBookmark);
         questionRightHand1AnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.question_right_hand_a001, qiContext));
+
+        // Question spread both hands so a 1
+        Bookmark questionBothHands1AnimBookmark = bookmarksMenu.get("questionBothHands1Anim");
+        BookmarkStatus questionBothHands1AnimBookmarkStatus = qiChatbot.bookmarkStatus(questionBothHands1AnimBookmark);
+        questionBothHands1AnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.spread_both_hands_so_a001, qiContext));
+
+        // Negation both hands 4
+        Bookmark negationBothHands4AnimBookmark = bookmarksMenu.get("negationBothHands4Anim");
+        BookmarkStatus negationBothHands4AnimBookmarkStatus = qiChatbot.bookmarkStatus(negationBothHands4AnimBookmark);
+        negationBothHands4AnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.negation_both_hands_a004, qiContext));
     }
 
     void runAnimation(@RawRes Integer animResource, QiContext qiContext) {
