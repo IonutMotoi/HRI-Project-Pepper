@@ -345,6 +345,11 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         Bookmark negationBothHands4AnimBookmark = bookmarksMenu.get("negationBothHands4Anim");
         BookmarkStatus negationBothHands4AnimBookmarkStatus = qiChatbot.bookmarkStatus(negationBothHands4AnimBookmark);
         negationBothHands4AnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.negation_both_hands_a004, qiContext));
+
+        // Hello 10
+        Bookmark negationBothHands4GAnimBookmark = bookmarksGreetings.get("negationBothHands4GAnim");
+        BookmarkStatus negationBothHands4GAnimBookmarkStatus = qiChatbot.bookmarkStatus(negationBothHands4GAnimBookmark);
+        negationBothHands4GAnimBookmarkStatus.addOnReachedListener(() -> runAnimation(R.raw.negation_both_hands_a004, qiContext));
     }
 
     void runAnimation(@RawRes Integer animResource, QiContext qiContext) {
