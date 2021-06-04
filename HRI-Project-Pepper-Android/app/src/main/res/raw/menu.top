@@ -26,7 +26,7 @@ concept:(fries) [fries] $Food=Fries $View=Sides
 concept:(onion) ["onion rings"] $Food="Onion rings" $View=Sides
 concept:(mozzarella) ["mozzarella sticks"] $Food=Mozzarella $View=Sides
 concept:(nuggets) [nuggets] $Food=Nuggets $View=Sides
-concept:(wings) ["chicken wings"] $Food="Chicken wing $View=Sidess"
+concept:(wings) ["chicken wings"] $Food="Chicken wings" $View=Sides
 concept:(salad) [salad salads] $Food=Salad $View=Sides
 
 concept:(coke) [coke cokes cola] $Food=Coke $View=Beverages
