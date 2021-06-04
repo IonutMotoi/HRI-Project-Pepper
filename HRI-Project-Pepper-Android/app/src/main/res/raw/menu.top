@@ -14,7 +14,6 @@ concept:(acknowledge) ^rand[Fine Ok Understood "Very well"]
 concept:(add) ^rand[added placed put]
 concept:(show) ^rand["Here are" "I'll show you" "These are" "I'll display you"]
 concept:(request) ^rand["Do you want" "Do you wish to order" "Would you like to order"]
-concept:(incomprehension) ^rand["I don't understand." "Sorry I can't understand what you said." "Can you repeat please?"]
 
 concept:(hamburger) [hamburger hamburgers] $Food=Hamburger $View=Mains
 concept:(taco) [taco tacos] $Food=Taco $View=Mains
