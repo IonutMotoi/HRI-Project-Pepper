@@ -92,7 +92,6 @@ proposal: Would you like me to guide you through the menu? $Drink=False
 #proposal: Here are the categories. %showTablet2Anim $Drink=False
 proposal: %goToMains What do you ^rand[want wish] to order from this category?
 
-
 proposal: %sameCategory ~request something else from this category?
     u1:(~yes) ~confirm, what else do you ^rand[want wish] to ^rand["order?" "add to your order?" "place into your order?"] %questionRightHand1Anim
     u1:($GuidedOrdering==True $View==Mains ~no) ~acknowledge, ~show the sides. %goToSides $View=Sides
@@ -102,24 +101,24 @@ proposal: %sameCategory ~request something else from this category?
     u1:(~no) ~acknowledge, then I'll ^rand[bring show display] you the previous menu. %goToMenu %raiseLeftHand1Anim
     u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope
 
-proposal: %noPrompt Your order is complete %raiseLeftHand1Anim
+proposal: %noPrompt Your order is complete. %raiseLeftHand1Anim ^topic(goodbye)
 
 proposal: %promptMains You haven't added a main to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
     u1:(~yes) What main do you want? %goToMains $View=Mains
-    u1:(~no) Your order is complete. %raiseLeftHand1Anim
+    u1:(~no) ~acknowledge %checkout  # This time it will go to noPrompt
     u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope
 
 proposal: %promptSides You haven't added a side to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
     u1:(~yes) What side do you want? %goToSides $View=Sides
-    u1:(~no) Your order is complete. %raiseLeftHand1Anim
+    u1:(~no) ~acknowledge %checkout  # This time it will go to noPrompt
     u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
 
 proposal: %promptBeverages You haven't added a drink to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
     u1:(~yes) What drink do you want? %goToBeverages $View=Beverages
-    u1:(~no) Your order is complete. %raiseLeftHand1Anim
+    u1:(~no) ~acknowledge %checkout  # This time it will go to noPrompt
     u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope
 
 proposal: %promptDesserts You haven't added a dessert to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
     u1:(~yes) What dessert do you want? %goToDesserts $View=Desserts
-    u1:(~no) Your order is complete. %raiseLeftHand1Anim
+    u1:(~no) ~acknowledge %checkout  # This time it will go to noPrompt
     u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope

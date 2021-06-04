@@ -9,12 +9,12 @@ concept:(yes) [Yes Sure Fine Ok Yeah]
 concept:(no) [No "Not yet" "Don't Knkow" "Not sure"]
 
 # Rules
-u:(~hello) ~hello %hello10Anim ^nextProposal
+u:(~hello) ~hello %hello10Anim ^enableThenGoto(promptOrder)
 u:(~ordering) Sure! $Start=true ^topic(menu) %menu
 u:(e:Dialog/NotUnderstood) I don't understand.
 
 # Proposals
-proposal: ~order-ask
+proposal: %promptOrder ~order-ask
   u1:(~yes) Great. $Start=true ^topic(menu) %menu
   u1:(~no) Oh. I am sorry. Let me know if I can help you.
   u1:(e:Dialog/NotUnderstood) I don't understand. ^stayInScope

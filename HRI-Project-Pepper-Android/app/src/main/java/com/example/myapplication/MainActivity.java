@@ -53,9 +53,21 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     private QiChatVariable foodVariable;
     private QiChatVariable numberVariable;
 
-    // Chat Bookmarks
+    // Chat topic bookmarks
     Map<String, Bookmark> bookmarksGreetings;
     Map<String, Bookmark> bookmarksMenu;
+    Map<String, Bookmark> bookmarksGoodbye;
+
+    // Chat Bookmarks
+    // Prompt on checkout
+    private Bookmark promptMainsBookmark;
+    private Bookmark promptSidesBookmark;
+    private Bookmark promptBeveragesBookmark;
+    private Bookmark promptDessertsBookmark;
+    private Bookmark noPromptBookmark;
+    final Boolean[] prompt = {true};
+    // Next client
+    private Bookmark nextClientBookmark;
 
     // Chat Bookmark Status
     private BookmarkStatus menuBookmarkStatus;
@@ -66,10 +78,12 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     private BookmarkStatus goToBeveragesBookmarkStatus;
     private BookmarkStatus goToDessertsBookmarkStatus;
     private BookmarkStatus checkoutBookmarkStatus;
+    private BookmarkStatus nextClientBookmarkStatus;
 
     // Chat topics
     private Topic topicGreetings;
     private Topic topicMenu;
+    private Topic topicGoodbye;
 
     // Buttons
     private Button startOrderButton;
@@ -82,6 +96,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     private ImageButton dessertsButton;
     private Button cancelOrderButton;
     private Button checkoutButton;
+    private Button nextClientButton;
 
     // Buttons plus and minus (12)
     private ImageButton plusButton1;
@@ -161,6 +176,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         if (goToBeveragesBookmarkStatus != null) {goToBeveragesBookmarkStatus.removeAllOnReachedListeners();}
         if (goToDessertsBookmarkStatus != null) {goToDessertsBookmarkStatus.removeAllOnReachedListeners();}
         if (checkoutBookmarkStatus != null) {checkoutBookmarkStatus.removeAllOnReachedListeners();}
+        if (nextClientBookmarkStatus != null) {nextClientBookmarkStatus.removeAllOnReachedListeners();}
     }
 
     @Override
@@ -176,10 +192,13 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         topicMenu = TopicBuilder.with(qiContext) // Create the builder using the QiContext.
                 .withResource(R.raw.menu) // Set the topic resource.
                 .build(); // Build the topic.
+        topicGoodbye = TopicBuilder.with(qiContext) // Create the builder using the QiContext.
+                .withResource(R.raw.goodbye) // Set the topic resource.
+                .build(); // Build the topic.
 
         // Create a new QiChatbot
         qiChatbot = QiChatbotBuilder.with(qiContext)
-                .withTopic(topicGreetings, topicMenu)
+                .withTopic(topicGreetings, topicMenu, topicGoodbye)
                 .build();
 
         // Create a new Chat action
@@ -226,6 +245,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         // Get the bookmarks from the topic
         bookmarksGreetings = topicGreetings.getBookmarks();
         bookmarksMenu = topicMenu.getBookmarks();
+        bookmarksGoodbye = topicGoodbye.getBookmarks();
 
         // Get the bookmarks
         Bookmark menuBookmark = bookmarksGreetings.get("menu");
@@ -236,12 +256,12 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         Bookmark goToBeveragesBookmark = bookmarksMenu.get("goToBeverages");
         Bookmark goToDessertsBookmark = bookmarksMenu.get("goToDesserts");
         Bookmark checkoutBookmark = bookmarksMenu.get("checkout");
-        Bookmark promptMainsBookmark = bookmarksMenu.get("promptMains");
-        Bookmark promptSidesBookmark = bookmarksMenu.get("promptSides");
-        Bookmark promptBeveragesBookmark = bookmarksMenu.get("promptBeverages");
-        Bookmark promptDessertsBookmark = bookmarksMenu.get("promptDesserts");
-        Bookmark noPromptBookmark = bookmarksMenu.get("noPrompt");
-
+        promptMainsBookmark = bookmarksMenu.get("promptMains");
+        promptSidesBookmark = bookmarksMenu.get("promptSides");
+        promptBeveragesBookmark = bookmarksMenu.get("promptBeverages");
+        promptDessertsBookmark = bookmarksMenu.get("promptDesserts");
+        noPromptBookmark = bookmarksMenu.get("noPrompt");
+        nextClientBookmark = bookmarksGoodbye.get("nextClient");
 
         // Create a BookmarkStatus for each bookmark
         menuBookmarkStatus = qiChatbot.bookmarkStatus(menuBookmark);
@@ -252,6 +272,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         goToBeveragesBookmarkStatus = qiChatbot.bookmarkStatus(goToBeveragesBookmark);
         goToDessertsBookmarkStatus = qiChatbot.bookmarkStatus(goToDessertsBookmark);
         checkoutBookmarkStatus = qiChatbot.bookmarkStatus(checkoutBookmark);
+        nextClientBookmarkStatus = qiChatbot.bookmarkStatus(nextClientBookmark);
 
         menuBookmarkStatus.addOnReachedListener(this::initMenuView);
 
@@ -274,70 +295,9 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
         goToBeveragesBookmarkStatus.addOnReachedListener(this::initBeveragesView);
         goToDessertsBookmarkStatus.addOnReachedListener(this::initDessertsView);
 
-        final Boolean[] prompt = {true};
-        checkoutBookmarkStatus.addOnReachedListener(() -> {
-            if(prompt[0]) {
-                String missingCategory = order.getMissingCategory();
-                switch (missingCategory) {
-                    case "Mains":
-                        Log.i("Prompt", "Mains");
-                        // Prompt mains
-                        qiChatbot.goToBookmark(
-                                promptMainsBookmark,
-                                AutonomousReactionImportance.HIGH,
-                                AutonomousReactionValidity.IMMEDIATE);
-                        // Deactivate other future prompts
-                        prompt[0] = false;
-                        break;
-                    case "Sides":
-                        // Prompt sides
-                        Log.i("Prompt", "Sides");
-                        qiChatbot.goToBookmark(
-                                promptSidesBookmark,
-                                AutonomousReactionImportance.HIGH,
-                                AutonomousReactionValidity.IMMEDIATE);
-                        // Deactivate other future prompts
-                        prompt[0] = false;
-                        break;
-                    case "Beverages":
-                        // Prompt beverages
-                        Log.i("Prompt", "Beverages");
-                        qiChatbot.goToBookmark(
-                                promptBeveragesBookmark,
-                                AutonomousReactionImportance.HIGH,
-                                AutonomousReactionValidity.IMMEDIATE);
-                        // Deactivate other future prompts
-                        prompt[0] = false;
-                        break;
-                    case "Desserts":
-                        // Prompt desserts
-                        Log.i("Prompt", "Desserts");
-                        qiChatbot.goToBookmark(
-                                promptDessertsBookmark,
-                                AutonomousReactionImportance.HIGH,
-                                AutonomousReactionValidity.IMMEDIATE);
-                        // Deactivate other future prompts
-                        prompt[0] = false;
-                        break;
-                    default:
-                        // No prompt
-                        Log.i("Prompt", "Null");
-                        qiChatbot.goToBookmark(
-                                noPromptBookmark,
-                                AutonomousReactionImportance.HIGH,
-                                AutonomousReactionValidity.IMMEDIATE);
-                        break;
-                }
-            }
-            else {
-                // No prompt
-                Log.i("Prompt", "Null");
-                qiChatbot.goToBookmark(
-                        noPromptBookmark,
-                        AutonomousReactionImportance.HIGH,
-                        AutonomousReactionValidity.IMMEDIATE);
-            }
-        });
+        checkoutBookmarkStatus.addOnReachedListener(this::promptOnCheckout);
+
+        nextClientBookmarkStatus.addOnReachedListener(this::restartOrder);
     }
 
     public void initAnimations() {
@@ -400,7 +360,7 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
             cancelOrderButton.setOnClickListener(v -> restartOrder());
 
             checkoutButton = findViewById(R.id.button_checkout);
-            checkoutButton.setOnClickListener(v -> restartOrder());
+            checkoutButton.setOnClickListener(v -> promptOnCheckout());
 
             mainsButton = findViewById(R.id.imagebutton_mains);
             mainsButton.setOnClickListener(v -> initMainsView());
@@ -854,6 +814,81 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
                     counter6.setText(order.list[23].num2str());
                 }
             });
+        });
+    }
+
+    public void promptOnCheckout() {
+        if(prompt[0]) {
+            String missingCategory = order.getMissingCategory();
+            switch (missingCategory) {
+                case "Mains":
+                    Log.i("Prompt", "Mains");
+                    // Prompt mains
+                    qiChatbot.goToBookmark(
+                            promptMainsBookmark,
+                            AutonomousReactionImportance.HIGH,
+                            AutonomousReactionValidity.IMMEDIATE);
+                    // Deactivate other future prompts
+                    prompt[0] = false;
+                    break;
+                case "Sides":
+                    // Prompt sides
+                    Log.i("Prompt", "Sides");
+                    qiChatbot.goToBookmark(
+                            promptSidesBookmark,
+                            AutonomousReactionImportance.HIGH,
+                            AutonomousReactionValidity.IMMEDIATE);
+                    // Deactivate other future prompts
+                    prompt[0] = false;
+                    break;
+                case "Beverages":
+                    // Prompt beverages
+                    Log.i("Prompt", "Beverages");
+                    qiChatbot.goToBookmark(
+                            promptBeveragesBookmark,
+                            AutonomousReactionImportance.HIGH,
+                            AutonomousReactionValidity.IMMEDIATE);
+                    // Deactivate other future prompts
+                    prompt[0] = false;
+                    break;
+                case "Desserts":
+                    // Prompt desserts
+                    Log.i("Prompt", "Desserts");
+                    qiChatbot.goToBookmark(
+                            promptDessertsBookmark,
+                            AutonomousReactionImportance.HIGH,
+                            AutonomousReactionValidity.IMMEDIATE);
+                    // Deactivate other future prompts
+                    prompt[0] = false;
+                    break;
+                default:
+                    // No prompt
+                    Log.i("Prompt", "Null");
+                    qiChatbot.goToBookmark(
+                            noPromptBookmark,
+                            AutonomousReactionImportance.HIGH,
+                            AutonomousReactionValidity.IMMEDIATE);
+                    initGoodbyeView();
+                    break;
+            }
+        }
+        else {
+            // No prompt
+            Log.i("Prompt", "Null");
+            qiChatbot.goToBookmark(
+                    noPromptBookmark,
+                    AutonomousReactionImportance.HIGH,
+                    AutonomousReactionValidity.IMMEDIATE);
+            initGoodbyeView();
+        }
+    }
+
+    public void initGoodbyeView() {
+        runOnUiThread(() -> {
+            setContentView(R.layout.goodbye);
+
+            nextClientButton = findViewById(R.id.button_next_client);
+            nextClientButton.setOnClickListener(v -> restartOrder());
         });
     }
 

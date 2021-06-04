@@ -1,0 +1,9 @@
+topic: ~goodbye()
+# Concepts
+concept:(goodbye) ^rand[Goodbye Bye "Have a nice day" "See you next time"]
+
+# Rules
+u:("next client") %nextClient
+
+# Proposals
+proposal: ~goodbye
