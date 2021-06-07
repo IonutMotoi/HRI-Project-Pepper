@@ -94,6 +94,7 @@ u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category
 proposal: Would you like me to guide you through the menu? $Drink=False %questionBothHands1Anim
     u1:([~yes "guide {me}"]) ~acknowledge, let's start from the mains. %showTablet2Anim $GuidedOrdering=True $View=Mains ^enableThenGoto(goToMains)
     u1:(~no) ~acknowledge, feel free to choose the category. %showTablet2Anim
+    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim
 
 #proposal: Here are the categories. %showTablet2Anim $Drink=False
 proposal: %goToMains What do you ^rand[want wish] to order from this category?
@@ -125,6 +126,6 @@ proposal: %promptBeverages You haven't added a drink to your order. Do you want 
     u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim
 
 proposal: %promptDesserts You haven't added a dessert to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
-    u1:(~yes) What dessert ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]?%goToDesserts $View=Desserts %showTablet2Anim
+    u1:(~yes) What dessert do you ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]?%goToDesserts $View=Desserts %showTablet2Anim
     u1:(~no) ~acknowledge %checkout  # This time it will go to noPrompt
     u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim
