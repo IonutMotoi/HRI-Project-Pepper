@@ -57,6 +57,8 @@ concept:(desserts) [desserts cakes sweet]
 concept:(category) [category submenu menu]
 concept:(checkout) [checkout "check out"]
 
+concept:(askname) ^rand["Can I get your name?" "What is your name?" "How may I call you?" "Sorry, I didn't get your name."]
+concept:(myname) ["My name's" "My name is" "I'm" "I am"]
 
 # Rules
 u:({I} {~want} {[some "a portion of" "a serving of"]} ~foodThem {please})  ~confirm! I ^rand["added them to" "^rand[put placed] them in"] your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
@@ -108,7 +110,9 @@ proposal: %sameCategory ~request something else from this category?
     u1:(~no) ~acknowledge, then I'll ^rand[bring show display] you the previous menu. %goToMenu %raiseLeftHand1Anim %showTablet2Anim
     u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim
 
-proposal: %noPrompt Your order is complete. %raiseLeftHand1Anim ^topic(goodbye)
+proposal: %noPrompt Your order is complete. ~askname %raiseLeftHand1Anim
+    u1:({~myname} _*) $Name=$1 Ok $Name, we will call you by name when your order will be ready. ^topic(goodbye) %goodbye
+    u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim
 
 proposal: %promptMains You haven't added a main to your order. Do you want to add one? $GuidedOrdering=False %questionRightHand1Anim
     u1:(~yes) What main do you ^rand[want wish "want to order" "wish to order" "want to add" "wish to add"]? %goToMains $View=Mains %showTablet4Anim
