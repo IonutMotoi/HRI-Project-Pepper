@@ -99,6 +99,7 @@ u:({~quantity} {of} mozzarella sticks {"there are" "{"in one" "in the"} {portion
 u:({~quantity} {of} chicken wings {"there are" "{"in one" "in the"} {portion serving}"} ?) ^rand["The serving is composed by" "The portion is composed by"] 3 chicken wings %questionBothHands1Anim
 u:({~quantity} {of} pancakes {"there are" "{"in one" "in the"} {portion serving}"} ?) ^rand["The serving is composed by" "The portion is composed by"] 4 pancakes %questionBothHands1Anim
 u:({~quantity} {of} crepes {"there are" "{"in one" "in the"} {portion serving}"} ?) ^rand["The serving is composed by" "The portion is composed by"] 1 crepes %questionBothHands1Anim
+
 # Proposals
 proposal: Would you like me to guide you through the menu? $Drink=False %questionBothHands1Anim
     u1:([~yes "guide {me}"]) ~acknowledge, let's start from the mains. %showTablet2Anim $GuidedOrdering=True $View=Mains ^enableThenGoto(goToMains)
