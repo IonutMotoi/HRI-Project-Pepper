@@ -117,7 +117,7 @@ proposal: %sameCategory ~request something else from this category?
     u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim
 
 proposal: %noPrompt Your order is complete. ~askname %raiseLeftHand1Anim
-    u1:(["Why do you [want need] {to} {know} my name"]) So that we will call you by name when the order is ready. If you prefer, we can assign you a number instead.
+    u1:(["Why do you [want need] {to} {know} my name"]) So that we will call you by name when the order is ready. If you prefer, we can assign you a number instead. ^stayInScope
     u1:(["I ["don't" "do not"] want to [give tell] you my name"
          "I ["won't" "will not"] [give tell] you my name"
          "[Assign Give Call] {me} {by} {a} number {instead}"]) $Name="~randomid" Ok, we will call you with the number $Name when your order will be ready. ^topic(goodbye) %goodbye
