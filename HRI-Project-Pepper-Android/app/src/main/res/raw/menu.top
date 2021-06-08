@@ -14,6 +14,7 @@ concept:(acknowledge) ^rand[Fine Ok Understood "Very well"]
 concept:(add) ^rand[added placed put]
 concept:(show) ^rand["Here are" "I'll show you" "These are" "I'll display you"]
 concept:(request) ^rand["Do you want" "Do you wish to order" "Would you like to order"]
+concept:(quantity) ["How many" "[Which What] is the number" "What is the size"]
 
 concept:(hamburger) [hamburger hamburgers] $Food=Hamburger $View=Mains
 concept:(taco) [taco tacos] $Food=Taco $View=Mains
@@ -91,6 +92,12 @@ u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category
 u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Beverages) ~show the sides. %goToSides $View=Sides %showTablet4Anim
 u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Desserts) ~show the beverages. %goToBeverages $View=Beverages %showTablet2Anim
 u:({[can could would]} {you} ["{go} back" "{"go back to the"} previous [category menu view]"] {please} $View==Menu) ~show your desserts. %goToDesserts $View=Desserts %showTablet3Anim
+
+# Ask question about the food
+u:({~quantity} {of} nuggets {"there are" "{"in one" "in the"} {portion serving}"} ?) ^rand["There are" "The serving is composed by" "The portion is composed by"] 6 nuggets %questionBothHands1Anim
+u:({~quantity} {of} mozzarella sticks {"there are" "{"in one" "in the"} {portion serving}"} ?) ^rand["There are" "The serving is composed by" "The portion is composed by"] 4 mozzarella sticks %questionBothHands1Anim
+u:({~quantity} {of} chicken wings {"there are" "{"in one" "in the"} {portion serving}"} ?) ^rand["There are" "The serving is composed by" "The portion is composed by"] 3 chicken wings %questionBothHands1Anim
+
 
 # Proposals
 proposal: Would you like me to guide you through the menu? $Drink=False %questionBothHands1Anim
