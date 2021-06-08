@@ -1,8 +1,4 @@
 topic: ~menu()
-# TODO Check grammar
-# TODO Ask user for name (Starbucks-like)
-# TODO Give indications to where collect the order
-# TODO Answer questions about the food
 
 # Concepts
 concept:(want) [want "would like" "'d like" wish]
@@ -59,6 +55,8 @@ concept:(checkout) [checkout "check out"]
 
 concept:(askname) ^rand["Can I get your name?" "What is your name?" "How may I call you?" "Sorry, I didn't get your name."]
 concept:(myname) ["My name's" "My name is" "I'm" "I am"]
+concept:(iddigit) ^rand[0 1 2 3 4 5 6 7 8 9]
+concept:(randomid) "~iddigit ~iddigit ~iddigit"
 
 # Rules
 u:({I} {~want} {[some "a portion of" "a serving of"]} ~foodThem {please})  ~confirm! I ^rand["added them to" "^rand[put placed] them in"] your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
@@ -111,6 +109,10 @@ proposal: %sameCategory ~request something else from this category?
     u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim
 
 proposal: %noPrompt Your order is complete. ~askname %raiseLeftHand1Anim
+    u1:(["Why do you [want need] {to} {know} my name"]) So that we will call you by name when the order is ready. If you prefer, we can assign you a number instead.
+    u1:(["I ["don't" "do not"] want to [give tell] you my name"
+         "I ["won't" "will not"] [give tell] you my name"
+         "[Assign Give Call] {me} {by} {a} number {instead}"]) $Name="~randomid" Ok, we will call you with the number $Name when your order will be ready. ^topic(goodbye) %goodbye
     u1:({~myname} _*) $Name=$1 Ok $Name, we will call you by name when your order will be ready. ^topic(goodbye) %goodbye
     u1:(e:Dialog/NotUnderstood) ~incomprehension ^stayInScope %negationBothHands4Anim
 
