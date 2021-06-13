@@ -4,8 +4,10 @@ package com.example.myapplication;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RawRes;
@@ -31,6 +33,7 @@ import com.aldebaran.qi.sdk.object.conversation.QiChatVariable;
 import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
 import com.aldebaran.qi.sdk.object.conversation.Topic;
 
+import java.time.temporal.ValueRange;
 import java.util.Map;
 
 public class MainActivity  extends RobotActivity implements RobotLifecycleCallbacks {
@@ -52,6 +55,8 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
     // Chat variables
     private QiChatVariable foodVariable;
     private QiChatVariable numberVariable;
+    private QiChatVariable isChildVariable;
+    private Boolean isChild = false;
 
     // Chat topic bookmarks
     Map<String, Bookmark> bookmarksGreetings;
@@ -241,6 +246,13 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
                 currentNumberValue -> Log.i(TAG, "Chat var Number: " + numberStringToInt(currentNumberValue))
         );
 
+        // IsChild
+        isChildVariable = qiChatbot.variable("IsChild");
+        isChildVariable.addOnValueChangedListener(Value -> {
+            Log.i(TAG, "Chat var IsChild: " + Value);
+            isChild = true;
+        });
+
         // Name
         QiChatVariable nameVariable = qiChatbot.variable("Name");
         nameVariable.addOnValueChangedListener(customerName -> name = customerName);
@@ -287,11 +299,12 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
             String food = foodVariable.getValue();
             int number = numberStringToInt(numberVariable.getValue());
 
-            // Add item/items to order
-            if (!order.getFoodItem(food).getName().equals("null")) {
-                order.getFoodItem(food).number = number;
+            if(!(isChild && food.equals("Beer"))) { // Cannot sell beer to children
+                // Add item/items to order
+                if (!order.getFoodItem(food).getName().equals("null")) {
+                    order.getFoodItem(food).number = number;
+                }
             }
-
             // Go to the View containing the requested food
             initCategoryFromName(food);
         });
@@ -731,19 +744,35 @@ public class MainActivity  extends RobotActivity implements RobotLifecycleCallba
                 }
             });
 
-            //salad buttons
-            plusButton6 = findViewById(R.id.imagebutton_beer_plus);
-            plusButton6.setOnClickListener(v -> {
-                order.list[17].number+=1;
-                counter6.setText(order.list[17].num2str());
-            });
-            minusButton6 = findViewById(R.id.imagebutton_beer_minus);
-            minusButton6.setOnClickListener(v -> {
-                if(order.list[17].number>0){
-                    order.list[17].number-=1;
+            //Beer buttons
+            if (isChild) { // If child hide the beer from the menu
+                ImageView beerImg = findViewById(R.id.image_beer);
+                beerImg.setVisibility(View.GONE);
+                plusButton6 = findViewById(R.id.imagebutton_beer_plus);
+                plusButton6.setVisibility(View.GONE);
+                minusButton6 = findViewById(R.id.imagebutton_beer_minus);
+                minusButton6.setVisibility(View.GONE);
+                counter6.setVisibility(View.GONE);
+                TextView beerPrice = findViewById(R.id.text_price_beer);
+                beerPrice.setVisibility(View.GONE);
+                TextView beerText = findViewById(R.id.text_beer);
+                beerText.setVisibility(View.GONE);
+            }
+            else{
+                plusButton6 = findViewById(R.id.imagebutton_beer_plus);
+                plusButton6.setOnClickListener(v -> {
+                    order.list[17].number += 1;
                     counter6.setText(order.list[17].num2str());
-                }
-            });
+                });
+                minusButton6 = findViewById(R.id.imagebutton_beer_minus);
+                minusButton6.setOnClickListener(v -> {
+                    if (order.list[17].number > 0) {
+                        order.list[17].number -= 1;
+                        counter6.setText(order.list[17].num2str());
+                    }
+                });
+            }
+
         });
     }
 

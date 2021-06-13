@@ -13,6 +13,7 @@ concept:(incomprehension) ^rand["I don't understand." "Sorry I can't understand 
 u:(~hello) ~hello %hello10Anim ^enableThenGoto(promptOrder)
 u:(~ordering) Sure! $Start=true ^topic(menu) %menu
 u:(e:Dialog/NotUnderstood) ~incomprehension %negationBothHands4GAnim
+u:(isChild) ^empty $IsChild=True
 
 # Proposals
 proposal: %promptOrder ~order-ask

@@ -12,7 +12,7 @@ concept:(show) ^rand["Here are" "I'll show you" "These are" "I'll display you"]
 concept:(request) ^rand["Do you want" "Do you wish to order" "Would you like to order"]
 concept:(quantity) ["How many" "[Which What] is the number" "What is the size"]
 
-concept:(hamburger) [hamburger hamburgers] $Food=Hamburger $View=Mains
+concept:(hamburger) [hamburger hamburgers burger] $Food=Hamburger $View=Mains
 concept:(taco) [taco tacos] $Food=Taco $View=Mains
 concept:(wrap) [wrap wraps] $Food=Wrap $View=Mains
 concept:(chicken) [chicken chickens] $Food=Chicken $View=Mains
@@ -43,7 +43,7 @@ concept:(pancake) [pancake pancakes] $Food=Pancake $View=Desserts
 concept:(foodThem) [~fries ~onion ~mozzarella ~nuggets ~wings]
 concept:(foodIt) [~hamburger ~taco ~wrap ~chicken ~toast ~pizza
                   ~salad
-                  ~coke ~sprite ~water ~fanta ~tea ~beer
+                  ~coke ~sprite ~water ~fanta ~tea
                   ~cake ~donut ~milkshake ~crepes ~ice ~pancake]
 concept:(food) [~foodThem ~foodIt]
 
@@ -63,6 +63,12 @@ concept:(randomid) "~iddigit ~iddigit ~iddigit"
 u:({I} {~want} {[some "a portion of" "a serving of"]} ~foodThem {please})  ~confirm! I ^rand["added them to" "^rand[put placed] them in"] your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
 u:({I} {~want} {[a an "a slice of" "a portion of" "a serving of"]} ~foodIt {please}) ~confirm! I ^rand["added it to" "^rand[put placed] it in"] your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
 u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please})~confirm I ^rand["added them to" "^rand[put placed] them in"] your order. $Number=$1 %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
+
+u:({I} {~want} {a} ~beer {please}) ^first["$IsChild==True Sorry, we cannot sell beer to minors, but you can choose any other beverage from this menu. $Number=one %addItem"
+                                   "~confirm! I ^rand["added it to" "^rand[put placed] it in"] your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)"]
+
+u:({I} {~want} _~number ~beer {please}) ^first["$IsChild==True Sorry, we cannot sell beer to minors, but you can choose any other beverage from this menu. $Number=$1 %addItem"
+                                          "~confirm I ^rand["added them to" "^rand[put placed] them in"] your order. $Number=$1 %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)"]
 
 u:({I} {~want} {to} checkout {please}) ~confirm, ^rand["This is" "Here is" "I'll show"] your order. %goToMenu %checkout %showTablet2Anim
 
