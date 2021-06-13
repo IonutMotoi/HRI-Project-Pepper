@@ -64,10 +64,10 @@ u:({I} {~want} {[some "a portion of" "a serving of"]} ~foodThem {please})  ~conf
 u:({I} {~want} {[a an "a slice of" "a portion of" "a serving of"]} ~foodIt {please}) ~confirm! I ^rand["added it to" "^rand[put placed] it in"] your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
 u:({I} {~want} _~number {["portions of" "servings of"]} ~food {please})~confirm I ^rand["added them to" "^rand[put placed] them in"] your order. $Number=$1 %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)
 
-u:({I} {~want} {a} ~beer {please}) ^first["$IsChild==True Sorry, we cannot sell beer to minors, but you can choose any other beverage from this menu. $Number=one %addItem"
+u:({I} {~want} {a} ~beer {please}) ^first["$IsChild==True Sorry, we cannot sell beer to minors, but you can choose any other beverage from this menu. $Number=one %negationLeftHandAnim %addItem"
                                    "~confirm! I ^rand["added it to" "^rand[put placed] it in"] your order. $Number=one %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)"]
 
-u:({I} {~want} _~number ~beer {please}) ^first["$IsChild==True Sorry, we cannot sell beer to minors, but you can choose any other beverage from this menu. $Number=$1 %addItem"
+u:({I} {~want} _~number ~beer {please}) ^first["$IsChild==True Sorry, we cannot sell beer to minors, but you can choose any other beverage from this menu. $Number=$1 %negationLeftHandAnim %addItem"
                                           "~confirm I ^rand["added them to" "^rand[put placed] them in"] your order. $Number=$1 %raiseLeftHand1Anim %addItem ^enableThenGoto(sameCategory)"]
 
 u:({I} {~want} {to} checkout {please}) ~confirm, ^rand["This is" "Here is" "I'll show"] your order. %goToMenu %checkout %showTablet2Anim
